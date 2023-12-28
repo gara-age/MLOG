@@ -35,7 +35,7 @@ struct CategoriesView: View {
     
 
 
-
+//로케일 설정 필요
     func formatCurrency(amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency

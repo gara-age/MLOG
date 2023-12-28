@@ -123,6 +123,8 @@ struct EditExpenseView: View {
                                     inputAmountString = formatNumberString(amountWithoutSeparator)
                                     amountString = inputAmountString
                                 })
+                            //로케일 설정 필요
+
                             Text("원")
                                 .fontWeight(.semibold)
                                 .toolbar {

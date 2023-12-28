@@ -29,7 +29,7 @@ class Expense : Identifiable {
     var currencyString: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.locale = Locale(identifier: "ko_KR")//로케일 설정필요
         
         
         return formatter.string(for: amount) ?? ""

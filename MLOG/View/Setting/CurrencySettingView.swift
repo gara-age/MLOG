@@ -18,7 +18,10 @@ struct CurrencySettingView: View {
         ("🇺🇸USD - 미국 달러", "$"),
         ("🇨🇳CNY - 중국 위안화", "元")
     ]
-    
+    //ja-JP
+    //zh-Hans-CN
+    //en-US
+    //ko_KR
     var body: some View {
         NavigationStack {
             List {

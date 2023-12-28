@@ -17,11 +17,11 @@ struct DateFilterView: View {
     var body: some View {
         VStack(spacing: 15){
             DatePicker("Start Date", selection: $start, displayedComponents: [.date])
-                .environment(\.locale, Locale(identifier: "ko_KR"))
+                .environment(\.locale, Locale(identifier: "ko-KR"))
 
             
             DatePicker("End Date", selection: $end, displayedComponents: [.date])
-                .environment(\.locale, Locale(identifier: "ko_KR"))
+                .environment(\.locale, Locale(identifier: "ko-KR"))
 
             
             HStack(spacing: 15){

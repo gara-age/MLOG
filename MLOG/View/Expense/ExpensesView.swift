@@ -111,7 +111,13 @@ struct ExpensesView: View {
                 expensesListView()
                     .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Text("검색"))
                     .navigationTitle("지출 내역")
-                    
+                    .overlay{
+                        if allExpenses.isEmpty || groupedExpenses.isEmpty {
+                            ContentUnavailableView{
+                                Label("내역이 없습니다", systemImage: "tray.fill")
+                            }
+                        }
+                    }
                     .blur(radius: showFilterView ? 8 : 0)
                     .disabled(showFilterView)
                     .overlay{
@@ -133,13 +139,7 @@ struct ExpensesView: View {
                         }
                         .animation(.snappy, value: showFilterView)
                     }
-                    .overlay{
-                        if allExpenses.isEmpty || groupedExpenses.isEmpty {
-                            ContentUnavailableView{
-                                Label("내역이 없습니다", systemImage: "tray.fill")
-                            }
-                        }
-                    }
+                   
                 
                 
                 

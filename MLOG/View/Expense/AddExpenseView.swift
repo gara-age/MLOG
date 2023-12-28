@@ -103,6 +103,8 @@ struct AddExpenseView: View {
                                     let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
                                     amountString = formatNumberString(amountWithoutSeparator)
                                 })
+                            //로케일 설정 필요
+
                             Text("원")
                                 .fontWeight(.semibold)
                                 .toolbar {
