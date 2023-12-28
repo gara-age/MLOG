@@ -118,6 +118,61 @@ struct ExpensesView: View {
                             }
                         }
                     }
+                    .toolbar(content: {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Menu(content: {
+                                Button {
+                                    setCurrency.toggle()
+                                    isFloatingButtonClicked = false
+                                }
+                            label: {
+                                //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
+                                Label("통화 설정", systemImage: "dollarsign")
+                            }
+                            .sheet(isPresented: $setCurrency) {
+                                CurrencySettingView()
+                                    .interactiveDismissDisabled()
+                            }
+                                Button {
+                                    setColor.toggle()
+                                    isFloatingButtonClicked = false
+                                }
+                            label: {
+                                Label("카테고리 테마 지정", systemImage: "paintpalette")
+                            }
+                            .sheet(isPresented: $setColor) {
+                                CategoryThemeSettingView()
+                                    .interactiveDismissDisabled()
+                            }
+                                Button {
+                                    addCategory.toggle()
+                                    isFloatingButtonClicked = false
+
+                                }
+                            label: {
+                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
+                            }
+                            .sheet(isPresented: $addCategory) {
+                            }
+                                Button {
+                                    addExpense.toggle()
+                                    isFloatingButtonClicked = false
+
+                                }
+                            label: {
+                                Label("내역 추가", systemImage: "note.text.badge.plus")
+                            }
+                            .sheet(isPresented: $addExpense) {
+                                AddExpenseView()
+                                    .interactiveDismissDisabled()
+                            }
+                            }) {
+                                Image(systemName: "plus")
+                                    
+                                
+                            }
+                        }
+                    })
                     .blur(radius: showFilterView ? 8 : 0)
                     .disabled(showFilterView)
                     .overlay{
@@ -144,7 +199,7 @@ struct ExpensesView: View {
                 
                 
             }
-            FloatingButtonView(addExpense: $addExpense, addCategory: $addCategory, setColor: $setColor, setCurrency: $setCurrency, isFloatingButtonClicked: $isFloatingButtonClicked)
+//            FloatingButtonView(addExpense: $addExpense, addCategory: $addCategory, setColor: $setColor, setCurrency: $setCurrency, isFloatingButtonClicked: $isFloatingButtonClicked)
         }
         
         .onAppear {

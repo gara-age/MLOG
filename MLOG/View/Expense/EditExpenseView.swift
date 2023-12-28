@@ -115,7 +115,7 @@ struct EditExpenseView: View {
                     HStack{
                         HStack{
                             TextField(amountString, text: $inputAmountString)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.decimalPad)
                                 .focused($isInputActive)
                                 .onChange(of: inputAmountString, perform: { value in
                                     // 구분 기호 제거 후 숫자로 변환하여 포맷 적용

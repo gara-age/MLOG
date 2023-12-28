@@ -12,30 +12,30 @@ struct CurrencySettingView: View {
     @State private var searchText: String = ""
     @State private var selectedCurrency: String?
     
-    let currencies = [
-        ("🇰🇷KRW - 한국 원화", "₩"),
-        ("🇯🇵JPY - 일본 엔화", "¥"),
-        ("🇺🇸USD - 미국 달러", "$"),
-        ("🇨🇳CNY - 중국 위안화", "元")
+    struct Currency: Identifiable {
+        var id: String { name }
+        let name: String
+    }
+
+    let currencies: [Currency] = [
+        Currency(name: "🇰🇷KRW 한국 원화"),    //ko_KR
+        Currency(name: "🇯🇵JPY 일본 엔화"),    //ja-JP
+        Currency(name: "🇺🇸USD 미국 달러"),    //en-US
+        Currency(name: "🇨🇳CNY 중국 위안화")    //zh-Hans-CN
     ]
-    //ja-JP
-    //zh-Hans-CN
-    //en-US
-    //ko_KR
+
     var body: some View {
         NavigationStack {
             List {
-                ForEach(currencies, id: \.0) { currency, symbol in
+                ForEach(currencies) { currency in
                     Button {
-                        selectedCurrency = currency
+                        selectedCurrency = currency.name
                         print("Selected Currency: \(selectedCurrency)")
                         dismiss()
                         // 여기에서 필요한 작업 수행
                     } label: {
                         HStack {
-                            Text(currency)
-                            Spacer()
-                            Text(symbol)
+                            Text("\(currency.name)")
                         }
                         .contentShape(Rectangle())
                     }
