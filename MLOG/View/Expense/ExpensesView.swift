@@ -43,6 +43,7 @@ struct ExpensesView: View {
     @State private var showFilterView : Bool = false
     @State private var filteredExpenses: [GroupedExpenses] = []
         @State private var isSearching = false
+    @State private var selectedExpenseForDeletion: Expense?
 
     
     enum DateFilter: String, CaseIterable {
@@ -122,17 +123,30 @@ struct ExpensesView: View {
                         ToolbarItem(placement: .topBarTrailing) {
                             Menu(content: {
                                 Button {
-                                    setCurrency.toggle()
+                                    addExpense.toggle()
                                     isFloatingButtonClicked = false
+
                                 }
                             label: {
-                                //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
-                                Label("통화 설정", systemImage: "dollarsign")
+                                Label("내역 추가", systemImage: "note.text.badge.plus")
                             }
-                            .sheet(isPresented: $setCurrency) {
-                                CurrencySettingView()
+                            .sheet(isPresented: $addExpense) {
+                                AddExpenseView()
                                     .interactiveDismissDisabled()
                             }
+                                
+                                Button {
+                                    addCategory.toggle()
+                                    isFloatingButtonClicked = false
+
+                                }
+                            label: {
+                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
+                            }
+                            .sheet(isPresented: $addCategory) {
+                            }
+                             
+                                
                                 Button {
                                     setColor.toggle()
                                     isFloatingButtonClicked = false
@@ -144,26 +158,18 @@ struct ExpensesView: View {
                                 CategoryThemeSettingView()
                                     .interactiveDismissDisabled()
                             }
+                            
+                                
                                 Button {
-                                    addCategory.toggle()
+                                    setCurrency.toggle()
                                     isFloatingButtonClicked = false
-
                                 }
                             label: {
-                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
+                                //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
+                                Label("통화 설정", systemImage: "dollarsign")
                             }
-                            .sheet(isPresented: $addCategory) {
-                            }
-                                Button {
-                                    addExpense.toggle()
-                                    isFloatingButtonClicked = false
-
-                                }
-                            label: {
-                                Label("내역 추가", systemImage: "note.text.badge.plus")
-                            }
-                            .sheet(isPresented: $addExpense) {
-                                AddExpenseView()
+                            .sheet(isPresented: $setCurrency) {
+                                CurrencySettingView()
                                     .interactiveDismissDisabled()
                             }
                             }) {
@@ -199,7 +205,6 @@ struct ExpensesView: View {
                 
                 
             }
-//            FloatingButtonView(addExpense: $addExpense, addCategory: $addCategory, setColor: $setColor, setCurrency: $setCurrency, isFloatingButtonClicked: $isFloatingButtonClicked)
         }
         
         .onAppear {
@@ -304,13 +309,24 @@ struct ExpensesView: View {
                                     }
                                     .tint(.delete)
                             }
+                            .alert(item: $selectedExpenseForDeletion) { expense in
+                                Alert(
+                                    title: Text("Delete Expense"),
+                                    message: Text("Are you sure you want to delete this expense?"),
+                                    primaryButton: .cancel(),
+                                    secondaryButton: .destructive(Text("Delete")) {
+                                        deleteExpense(expense)
+                                    }
+                                )
+                            }
+
                             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                     
                                     Button {
                                         editExpense(expense)
                                     } label: {
                                         Image(systemName: "pencil")
-                                            .fontWeight(.bold)
+
                                     }
                                     .tint(.edit)                            }
                     }
@@ -319,6 +335,20 @@ struct ExpensesView: View {
             .environment(\.locale, Locale(identifier: "ko_KR"))
         }
     }
+    func deleteExpense(_ expense: Expense) {
+        context.delete(expense)
+        withAnimation {
+            groupedExpenses.removeAll { $0.expenses.contains(expense) }
+            if let index = originalGroupedExpenses.firstIndex(where: { $0.expenses.contains(expense) }) {
+                originalGroupedExpenses[index].expenses.removeAll { $0 == expense }
+                if originalGroupedExpenses[index].expenses.isEmpty {
+                    originalGroupedExpenses.remove(at: index)
+                }
+            }
+        }
+        selectedExpenseForDeletion = nil
+    }
+
     private func resetFiler() {
         selectedDateFilter = .all
         selectedSortOrder = .latestFirst
@@ -515,34 +545,6 @@ struct ExpensesView: View {
         }
     }
 
-    struct ExpenseRowView: View {
-        @StateObject private var settingsViewModel = SettingsViewModel.shared
-        
-        let expense: Expense
-        let onDelete: () -> Void
-        let onEdit: () -> Void
-        
-        var body: some View {
-            ExpenseCardView(expense: expense)
-                .environmentObject(settingsViewModel)
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button {
-                        onDelete()
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                    .tint(.delete)
-                    
-                    Button {
-                        onEdit()
-                    } label: {
-                        Image(systemName: "pencil")
-                            .fontWeight(.bold)
-                    }
-                    .tint(.edit)
-                }
-        }
-    }
 }
 
 
