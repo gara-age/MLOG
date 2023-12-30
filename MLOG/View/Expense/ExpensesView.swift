@@ -297,27 +297,12 @@ struct ExpensesView: View {
                             .environmentObject(settingsViewModel)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button {
-                                    context.delete(expense)
-                                    withAnimation {
-                                        group.expenses.removeAll(where: { $0.id == expense.id })
-                                        if group.expenses.isEmpty {
-                                            groupedExpenses.removeAll(where: { $0.id == group.id })
-                                        }
-                                    }
+                                    selectedExpenseForDeletion = expense
+                                    deleteRequest.toggle()
                                 } label: {
                                         Image(systemName: "trash")
                                     }
                                     .tint(.delete)
-                            }
-                            .alert(item: $selectedExpenseForDeletion) { expense in
-                                Alert(
-                                    title: Text("Delete Expense"),
-                                    message: Text("Are you sure you want to delete this expense?"),
-                                    primaryButton: .cancel(),
-                                    secondaryButton: .destructive(Text("Delete")) {
-                                        deleteExpense(expense)
-                                    }
-                                )
                             }
 
                             .swipeActions(edge: .leading, allowsFullSwipe: false) {
@@ -334,19 +319,33 @@ struct ExpensesView: View {
             }
             .environment(\.locale, Locale(identifier: "ko_KR"))
         }
-    }
-    func deleteExpense(_ expense: Expense) {
-        context.delete(expense)
-        withAnimation {
-            groupedExpenses.removeAll { $0.expenses.contains(expense) }
-            if let index = originalGroupedExpenses.firstIndex(where: { $0.expenses.contains(expense) }) {
-                originalGroupedExpenses[index].expenses.removeAll { $0 == expense }
-                if originalGroupedExpenses[index].expenses.isEmpty {
-                    originalGroupedExpenses.remove(at: index)
+        
+        .alert("내역 삭제시 복구가 어렵습니다. 정말 삭제하시겠습니까?", isPresented: $deleteRequest) {
+            Button(role: .destructive) {
+                if let expenseToDelete = selectedExpenseForDeletion {
+                    context.delete(expenseToDelete)
+                    withAnimation {
+                        groupedExpenses.removeAll { $0.expenses.contains(expenseToDelete) }
+                        if let index = originalGroupedExpenses.firstIndex(where: { $0.expenses.contains(expenseToDelete) }) {
+                            originalGroupedExpenses[index].expenses.removeAll { $0 == expenseToDelete }
+                            if originalGroupedExpenses[index].expenses.isEmpty {
+                                originalGroupedExpenses.remove(at: index)
+                            }
+                        }
+                    }
                 }
+            } label: {
+                Text("삭제")
+            }
+
+            Button(role: .cancel) {
+                selectedExpenseForDeletion = nil
+            } label: {
+                Text("취소")
             }
         }
-        selectedExpenseForDeletion = nil
+
+
     }
 
     private func resetFiler() {
