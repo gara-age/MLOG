@@ -20,7 +20,7 @@ struct ExpensesView: View {
     @State  var originalGroupedExpenses: [GroupedExpenses] = []
     @State var addExpense: Bool = false
     @State  var addCategory: Bool = false
-    @State  var setColor: Bool = false
+//    @State  var setColor: Bool = false
     @State private var isEditingExpense = false
     @State  var searchText: String = ""
     
@@ -28,9 +28,9 @@ struct ExpensesView: View {
     @State private var addedCategory: Category?
     @State private var selectedExpense: Expense?
     @State private var setCurrency: Bool = false
-    @Binding var isFloatingButtonClicked: Bool
+    @Binding var isToolBarClicked: Bool
     @State private var deleteRequest: Bool = false
-    
+     
     //검색기능
     @State private var selectedDateFilter: DateFilter = .all
     @State private var selectedSortOrder: SortOrder = .latestFirst
@@ -44,6 +44,7 @@ struct ExpensesView: View {
     @State private var filteredExpenses: [GroupedExpenses] = []
         @State private var isSearching = false
     @State private var selectedExpenseForDeletion: Expense?
+    @State private var showCategoryThemeSettingView = false
 
     
     enum DateFilter: String, CaseIterable {
@@ -124,7 +125,7 @@ struct ExpensesView: View {
                             Menu(content: {
                                 Button {
                                     addExpense.toggle()
-                                    isFloatingButtonClicked = false
+                                    isToolBarClicked = false
 
                                 }
                             label: {
@@ -137,24 +138,29 @@ struct ExpensesView: View {
                                 
                                 Button {
                                     addCategory.toggle()
-                                    isFloatingButtonClicked = false
+                                    isToolBarClicked = false
 
                                 }
                             label: {
                                 Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
                             }
                             .sheet(isPresented: $addCategory) {
+                                AddCategorySheetView(
+                                    categoryName: $categoryName,
+                                    addCategory: $addCategory,
+                                    showCategoryThemeSettingView: $showCategoryThemeSettingView
+                                )
                             }
                              
                                 
                                 Button {
-                                    setColor.toggle()
-                                    isFloatingButtonClicked = false
+                                    showCategoryThemeSettingView.toggle()
+                                    isToolBarClicked = false
                                 }
                             label: {
                                 Label("카테고리 테마 지정", systemImage: "paintpalette")
                             }
-                            .sheet(isPresented: $setColor) {
+                            .sheet(isPresented: $showCategoryThemeSettingView) {
                                 CategoryThemeSettingView()
                                     .interactiveDismissDisabled()
                             }
@@ -162,7 +168,7 @@ struct ExpensesView: View {
                                 
                                 Button {
                                     setCurrency.toggle()
-                                    isFloatingButtonClicked = false
+                                    isToolBarClicked = false
                                 }
                             label: {
                                 //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
@@ -177,6 +183,10 @@ struct ExpensesView: View {
                                     
                                 
                             }
+                            .onTapGesture {
+                                isToolBarClicked = true
+
+                                           }
                         }
                     })
                     .blur(radius: showFilterView ? 8 : 0)
@@ -245,7 +255,7 @@ struct ExpensesView: View {
             AddExpenseView()
                 .interactiveDismissDisabled()
         }
-        .sheet(isPresented: $setColor) {
+        .sheet(isPresented: $showCategoryThemeSettingView) {
             CategoryThemeSettingView()
                 .interactiveDismissDisabled()
         }
@@ -257,10 +267,14 @@ struct ExpensesView: View {
                     createGroupedExpenses(allExpenses)
                 }
         }
-
         .sheet(isPresented: $addCategory) {
-            AddCategorySheetView(categoryName: $categoryName, addCategory: $addCategory)
+            AddCategorySheetView(
+                categoryName: $categoryName,
+                addCategory: $addCategory,
+                showCategoryThemeSettingView: $showCategoryThemeSettingView
+            )
         }
+        
         .sheet(isPresented: $setCurrency) {
             CurrencySettingView()
                 .interactiveDismissDisabled()

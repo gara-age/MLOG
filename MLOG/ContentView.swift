@@ -15,8 +15,8 @@ struct ContentView: View {
     @State  var addCategory: Bool = false
     @State  var setting: Bool = false
     @State var isContentReady : Bool = false
-    @State private var isFloatingButtonClicked: Bool = false
-
+    @State private var isToolBarClicked: Bool = false
+ 
 
     var body: some View {
         
@@ -24,7 +24,7 @@ struct ContentView: View {
 
             TabView(selection: $currentTab){
 
-                ExpensesView(currentTab: $currentTab , isFloatingButtonClicked: $isFloatingButtonClicked)
+                ExpensesView(currentTab: $currentTab , isToolBarClicked: $isToolBarClicked)
                     .tag("모든내역")
                     .tabItem {
                         Image(systemName: "creditcard.fill")
@@ -32,7 +32,7 @@ struct ContentView: View {
                     }
                 
                 
-                CategoriesView(isFloatingButtonClicked: $isFloatingButtonClicked)
+                CategoriesView(isToolBarClicked: $isToolBarClicked)
                     .tag("카테고리")
                     .tabItem {
                         Image(systemName: "list.clipboard.fill")
@@ -46,13 +46,13 @@ struct ContentView: View {
                     .background(Color.animBG)
                     .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }
-            if isFloatingButtonClicked {
+            if isToolBarClicked {
 
                           Color.black
                               .opacity(0.3)
                               .ignoresSafeArea(.all)
                               .onTapGesture {
-                                  isFloatingButtonClicked = false
+                                  isToolBarClicked = false
                               }
                       }
 

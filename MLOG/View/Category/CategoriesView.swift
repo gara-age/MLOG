@@ -13,8 +13,8 @@ struct CategoriesView: View {
     @Query(sort: [SortDescriptor(\Expense.date, order: .reverse)], animation: .snappy) var allExpenses: [Expense]
     @Environment(\.modelContext) private var context
     @StateObject private var settingsViewModel = SettingsViewModel()
-    @Binding var isFloatingButtonClicked: Bool
-
+    @Binding var isToolBarClicked: Bool
+ 
     @State var addCategory: Bool = false
     @State var categoryName: String = ""
     @State private var deleteRequest: Bool = false
@@ -48,6 +48,7 @@ struct CategoriesView: View {
     @State  var originalGroupedExpenses: [GroupedExpenses] = []
     @State  var searchText: String = ""
     @State private var expenseToDelete: Expense?
+    @State private var showCategoryThemeSettingView = false
 
     
     enum DateFilter: String, CaseIterable {
@@ -144,7 +145,7 @@ struct CategoriesView: View {
                         Menu(content: {
                             Button {
                                 addExpense.toggle()
-                                isFloatingButtonClicked = false
+                                isToolBarClicked = false
 
                             }
                         label: {
@@ -157,24 +158,29 @@ struct CategoriesView: View {
                             
                             Button {
                                 addCategory.toggle()
-                                isFloatingButtonClicked = false
+                                isToolBarClicked = false
 
                             }
                         label: {
                             Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
                         }
                         .sheet(isPresented: $addCategory) {
+                            AddCategorySheetView(
+                                categoryName: $categoryName,
+                                addCategory: $addCategory,
+                                showCategoryThemeSettingView: $showCategoryThemeSettingView
+                            )
                         }
                          
                             
                             Button {
-                                setColor.toggle()
-                                isFloatingButtonClicked = false
+                                showCategoryThemeSettingView.toggle()
+                                isToolBarClicked = false
                             }
                         label: {
                             Label("카테고리 테마 지정", systemImage: "paintpalette")
                         }
-                        .sheet(isPresented: $setColor) {
+                        .sheet(isPresented: $showCategoryThemeSettingView) {
                             CategoryThemeSettingView()
                                 .interactiveDismissDisabled()
                         }
@@ -182,7 +188,7 @@ struct CategoriesView: View {
                             
                             Button {
                                 setCurrency.toggle()
-                                isFloatingButtonClicked = false
+                                isToolBarClicked = false
                             }
                         label: {
                             //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
@@ -197,6 +203,10 @@ struct CategoriesView: View {
                                 
                             
                         }
+                        .onTapGesture {
+                                    isToolBarClicked = true
+
+                                       }
                     }
                 })
 
@@ -217,9 +227,8 @@ struct CategoriesView: View {
                     settingsViewModel.Changed.toggle()
                     saveContext()
                 }
-                .sheet(isPresented: $addCategory) {
-                    AddCategorySheetView(categoryName: $categoryName, addCategory: $addCategory)
-                }
+               
+
             }
             
         }
@@ -228,7 +237,7 @@ struct CategoriesView: View {
             AddExpenseView()
                 .interactiveDismissDisabled()
         }
-        .sheet(isPresented: $setColor) {
+        .sheet(isPresented: $showCategoryThemeSettingView) {
             CategoryThemeSettingView()
                 .interactiveDismissDisabled()
         }
@@ -238,7 +247,13 @@ struct CategoriesView: View {
                 .interactiveDismissDisabled()
         }
         
-        
+        .sheet(isPresented: $addCategory) {
+            AddCategorySheetView(
+                categoryName: $categoryName,
+                addCategory: $addCategory,
+                showCategoryThemeSettingView: $showCategoryThemeSettingView
+            )
+        }
        
     }
 

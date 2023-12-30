@@ -17,7 +17,7 @@ struct CategoryThemeSettingView: View {
     @State private var categories: [Category] = []
 
 
-
+ 
     
     var body: some View {
         NavigationStack {
@@ -57,8 +57,8 @@ struct CategoryThemeSettingView: View {
             .navigationTitle("카테고리 테마 설정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("돌아가기") {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("저장") {
                         dismiss()
                     }
                 }

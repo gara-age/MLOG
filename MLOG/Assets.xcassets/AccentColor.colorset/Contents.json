@@ -29,7 +29,7 @@
       ],
       "color" : {
         "platform" : "ios",
-        "reference" : "systemGrayColor"
+        "reference" : "labelColor"
       },
       "idiom" : "universal"
     }
