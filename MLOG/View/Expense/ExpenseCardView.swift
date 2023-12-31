@@ -55,7 +55,7 @@ struct ExpenseCardView: View {
 //로케일 설정 필요
      func formatCurrency(amount: Double) -> String  {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+        formatter.numberStyle = .decimal
         formatter.currencySymbol = ""
 
         if let formattedString = formatter.string(for: amount) {

@@ -30,14 +30,14 @@ struct EditExpenseView: View {
     @FocusState var isInputActive: Bool
     @State private var isSelectedIncome = false
     @State private var isSelectedExpense = false
-
+    
     
     
     
     @Query(animation: .snappy) private var allCategories: [Category]
     
     var expense: Expense?
-
+    
     init(expense: Expense? = nil) {
         self.expense = expense
         
@@ -49,7 +49,7 @@ struct EditExpenseView: View {
             
             _date = State(initialValue: expense.date)
             _category = State(initialValue: expense.category)
-
+            
         }
         
     }
@@ -120,11 +120,34 @@ struct EditExpenseView: View {
                                 .onChange(of: inputAmountString, perform: { value in
                                     // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
                                     let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
-                                    inputAmountString = formatNumberString(amountWithoutSeparator)
-                                    amountString = inputAmountString
+                                    let formattedString = formatNumberString(amountWithoutSeparator)
+                                    
+                                    if value.contains(".") {
+                                        let components = value.components(separatedBy: ".")
+                                        if components.count == 1 {
+                                            let decimalPart = components[1]
+                                            if decimalPart.count > 2 {
+                                                let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                inputAmountString = formattedString + "." + decimalPart[..<index]
+                                            } else {
+                                                inputAmountString = formattedString + "." + decimalPart
+                                            }
+                                        }
+                                    } else {
+                                        inputAmountString = formattedString
+                                    }
+                                    
+                                    // 추가: 소수점 이하 숫자 자릿수 제한
+                                    if let decimalIndex = inputAmountString.firstIndex(of: ".") {
+                                        let decimalPart = inputAmountString.suffix(from: decimalIndex).dropFirst()
+                                        if decimalPart.count > 2 {
+                                            let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                            inputAmountString = inputAmountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
+                                        }
+                                    }
                                 })
                             //로케일 설정 필요
-
+                            
                             Text("원")
                                 .fontWeight(.semibold)
                                 .toolbar {
@@ -148,9 +171,9 @@ struct EditExpenseView: View {
                 }
                 .environment(\.locale, Locale(identifier: "ko_KR"))
                 
-               
+                
             }
-          
+            
             .navigationTitle("내역 수정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
@@ -170,13 +193,18 @@ struct EditExpenseView: View {
     }
     
     var isUpdateButtonDisabled: Bool {
-        return title.isEmpty || amountString == nil || (!isSelectedIncome && !isSelectedExpense)
+        return title.isEmpty || inputAmountString == nil || (!isSelectedIncome && !isSelectedExpense)
     }
     
-
+    
     func updateExpense() {
-        amount = CGFloat(Double(amountString.replacingOccurrences(of: ",", with: "")) ?? 0)
         
+        var updatedAmountString = inputAmountString
+           if updatedAmountString.isEmpty {
+               updatedAmountString = amountString
+           }
+        amount = CGFloat(Double(updatedAmountString.replacingOccurrences(of: ",", with: "")) ?? 0)
+
         if let existingExpense = expense {
             // expense가 존재하면 업데이트 수행
             existingExpense.title = title

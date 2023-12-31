@@ -66,7 +66,7 @@ struct AddExpenseView: View {
                     TextField("지출 또는 수입 내용을 입력하세요.", text: $title)
                         .fixedSize(horizontal: false, vertical: true)
                         .focused($isInputActive)
-
+                    
                     
                 }
                 HStack{
@@ -101,10 +101,40 @@ struct AddExpenseView: View {
                                 .onChange(of: amountString, perform: { value in
                                     // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
                                     let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
-                                    amountString = formatNumberString(amountWithoutSeparator)
+                                    let formattedString = formatNumberString(amountWithoutSeparator)
+                                    
+                                    // 소수점 이후 부분에만 , 추가
+                                    if value.contains(".") {
+                                        let components = value.components(separatedBy: ".")
+                                        if components.count == 1 {
+                                            let decimalPart = components[1]
+                                            
+                                            // 숫자를 2자리로 제한
+                                            if decimalPart.count > 2 {
+                                                let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                amountString = formattedString + "." + decimalPart[..<index]
+                                            } else {
+                                                amountString = formattedString + "." + decimalPart
+                                            }
+                                        }
+                                    } else {
+                                        amountString = formattedString
+                                    }
+                                    
+                                    // 추가: 소수점 이하 숫자 자릿수 제한
+                                    if let decimalIndex = amountString.firstIndex(of: ".") {
+                                        let decimalPart = amountString.suffix(from: decimalIndex).dropFirst()
+                                        if decimalPart.count > 2 {
+                                            let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                            amountString = amountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
+                                        }
+                                    }
                                 })
+                            
+                            
+                            
                             //로케일 설정 필요
-
+                            
                             Text("원")
                                 .fontWeight(.semibold)
                                 .toolbar {
@@ -146,7 +176,7 @@ struct AddExpenseView: View {
                 }
             })
         }
-
+        
     }
     var isAddButtonDisabled: Bool {
         return title.isEmpty || amountString == nil || (!isSelectedIncome && !isSelectedExpense)
