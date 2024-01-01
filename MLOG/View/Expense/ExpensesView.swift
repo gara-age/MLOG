@@ -171,7 +171,6 @@ struct ExpensesView: View {
                                     isToolBarClicked = false
                                 }
                             label: {
-                                //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
                                 Label("통화 설정", systemImage: "dollarsign")
                             }
                             .sheet(isPresented: $setCurrency) {

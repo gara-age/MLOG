@@ -13,7 +13,8 @@ import SwiftData
 struct EditExpenseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
-    
+    @AppStorage("selectedCurrency") private var selectedCurrency: String = "원"
+
     
     @State private var title: String = ""
     @State private var subTitle: String = ""
@@ -148,7 +149,7 @@ struct EditExpenseView: View {
                                 })
                             //로케일 설정 필요
                             
-                            Text("원")
+                            Text(selectedCurrency)
                                 .fontWeight(.semibold)
                                 .toolbar {
                                     ToolbarItemGroup(placement: .keyboard) {

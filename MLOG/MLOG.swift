@@ -9,13 +9,14 @@ import SwiftUI
 
 @main
 struct MalendarApp: App{
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
         //setting up container
         .modelContainer(for: [Expense.self, Category.self])
+
     }
 }
 

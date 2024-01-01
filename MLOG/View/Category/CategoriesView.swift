@@ -106,21 +106,6 @@ struct CategoriesView: View {
         case incomeOnly = "수입만"
         case expenseOnly = "지출만"
     }
-   
-
-
-//로케일 설정 필요
-    func formatCurrency(amount: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencySymbol = ""
-
-        if let formattedString = formatter.string(for: amount) {
-            return formattedString + "원"
-        } else {
-            return "\(amount) 원"
-        }
-    }
 
     func sortedExpenses(for category: Category) -> [Expense]? {
         return allExpenses.filter { $0.category == category }.sorted(by: { $0.date < $1.date })
@@ -271,6 +256,8 @@ struct CategoriesView: View {
 struct CategorySectionView: View {
     @StateObject private var settingsViewModel = SettingsViewModel.shared
     @Query(sort: [SortDescriptor(\Expense.date, order: .reverse)], animation: .snappy) var allExpenses: [Expense]
+    @AppStorage("selectedCurrency") private var selectedCurrency: String?
+
     @State var addExpense: Bool = false
     @State private var selectedExpense: Expense?
     @State private var isEditingExpense = false
@@ -467,19 +454,49 @@ struct CategorySectionView: View {
         }
 
     let category: Category
-
+//로케일 설정 필요
+//    func formatCurrency(amount: Double) -> String {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .decimal
+//        formatter.currencySymbol = ""
+//
+//        if let formattedString = formatter.string(for: amount) {
+//            return  (selectedCurrency ?? "₩") + " " + formattedString
+//            //달러 등으로 통화 변경시
+////            return "$" + formattedString
+//        } else {
+//            return "\(selectedCurrency) \(amount)"
+//        }
+//    }
     func formatCurrency(amount: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.currencySymbol = ""
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.currencySymbol = ""
 
-        if let formattedString = formatter.string(for: amount) {
-            return formattedString + "원"
-        } else {
-            return "\(amount) 원"
+            if let selectedCurrency = selectedCurrency {
+                // UserDefaults에서 저장된 NumberFormatter 불러오기
+                if let data = UserDefaults.standard.value(forKey: "currencyFormatter") as? Data,
+                   let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
+
+                    // 음수와 양수에 대한 형식 적용
+                    if selectedCurrency == "원" {
+                        savedFormatter.positiveFormat = "#,##0\(selectedCurrency)"
+                        savedFormatter.negativeFormat = "-#,##0\(selectedCurrency)"
+                    } else {
+                        savedFormatter.positiveFormat = "\(selectedCurrency)#,##0.##"
+                        savedFormatter.negativeFormat = "-\(selectedCurrency)#,##0.##"
+                    }
+
+                    // 금액 포맷팅
+                    if let formattedString = savedFormatter.string(for: amount) {
+                        return formattedString
+                    }
+                }
+            }
+
+            // 기본값
+            return "\(amount) \(selectedCurrency ?? "")"
         }
-    }
-
     func sortedExpenses(for category: Category) -> [Expense]? {
         return allExpenses.filter { $0.category == category }.sorted(by: { $0.date < $1.date })
     }

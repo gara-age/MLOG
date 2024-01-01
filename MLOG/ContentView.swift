@@ -46,15 +46,15 @@ struct ContentView: View {
                     .background(Color.animBG)
                     .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }
-            if isToolBarClicked {
-
-                          Color.black
-                              .opacity(0.3)
-                              .ignoresSafeArea(.all)
-                              .onTapGesture {
-                                  isToolBarClicked = false
-                              }
-                      }
+//            if isToolBarClicked {
+//
+//                          Color.black
+//                              .opacity(0.3)
+//                              .ignoresSafeArea(.all)
+//                              .onTapGesture {
+//                                  isToolBarClicked = false
+//                              }
+//                      }
 
         }
 
