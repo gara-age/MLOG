@@ -67,11 +67,11 @@ struct ExpenseCardView: View {
 
                     // 음수와 양수에 대한 형식 적용
                     if selectedCurrency == "원" {
-                        savedFormatter.positiveFormat = "#,##0\(selectedCurrency)"
-                        savedFormatter.negativeFormat = "-#,##0\(selectedCurrency)"
+                        savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
+                        savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
                     } else {
-                        savedFormatter.positiveFormat = "\(selectedCurrency)#,##0.##"
-                        savedFormatter.negativeFormat = "-\(selectedCurrency)#,##0.##"
+                        savedFormatter.positiveFormat = " \(selectedCurrency) #,##0.##"
+                        savedFormatter.negativeFormat = "- \(selectedCurrency) #,##0.##"
                     }
 
                     // 금액 포맷팅

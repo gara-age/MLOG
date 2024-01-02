@@ -454,20 +454,7 @@ struct CategorySectionView: View {
         }
 
     let category: Category
-//로케일 설정 필요
-//    func formatCurrency(amount: Double) -> String {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        formatter.currencySymbol = ""
-//
-//        if let formattedString = formatter.string(for: amount) {
-//            return  (selectedCurrency ?? "₩") + " " + formattedString
-//            //달러 등으로 통화 변경시
-////            return "$" + formattedString
-//        } else {
-//            return "\(selectedCurrency) \(amount)"
-//        }
-//    }
+
     func formatCurrency(amount: Double) -> String {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
