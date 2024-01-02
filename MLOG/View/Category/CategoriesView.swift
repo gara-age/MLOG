@@ -518,7 +518,7 @@ struct CategorySectionView: View {
                             Text(expense.date, formatter: dateFormatter)
                                 .textScale(.secondary)
                             ExpenseCardView(expense: expense, displayTag: false)
-                                .font(.custom("NotoSansArabic-Medium", size: 20))
+//                                .font(.custom("NotoSansArabic-Medium", size: 17))
 
                                 .environmentObject(settingsViewModel)
                         }

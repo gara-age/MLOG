@@ -59,7 +59,7 @@ struct CurrencySettingView: View {
             Currency(symbol: "kr", name: "🇩🇰DKK   덴마크   -   덴마크 크로네"),
             Currency(symbol: "$", name: "🇩🇴DOP   도미니카 공화국   -   도미니카 페소"),
             Currency(symbol: "د.ج", name: "🇩🇿DZD   알제리   -   알제르 디나르"), //표기안됨
-            Currency(symbol: "£", name: "🇪🇬EGP   이집트   -   이집트 파운드"),
+            Currency(symbol: "ج.م" , name: "🇪🇬EGP   이집트   -   이집트 파운드"),
             Currency(symbol: "Nfk", name: "🇪🇷ERN   에리트레아   -   낙파"),
             Currency(symbol: "Br", name: "🇪🇹ETB   에티오피아   -   에디오피안 비르"),
             Currency(symbol: "€", name: "🇪🇺EUR   유로"),
@@ -224,12 +224,22 @@ struct CurrencySettingView: View {
 
         if currencySymbol == "원" {
             // 대한민국 원화일 경우
-            formatter.positiveFormat = "#,##0원"
-            formatter.negativeFormat = "-#,##0원"
-        } else {
+            formatter.positiveFormat = "#,##0 원"
+            formatter.negativeFormat = "- #,## 0원"
+        }else if ["د.إ", "ب.د", "د.ج", "ع.د", "د.ا", "د.ك", "ل.د", "د.م.", "ރ.", "ر.ع.", "ر.ق", "ر.س", "ل.س", "د.ت", "﷼","ج.م"].contains(selectedCurrency)
+        {
+            // 특정 통화일 경우
+            formatter.currencySymbol = currencySymbol
+            Text("\(currencySymbol)")
+            
+            formatter.positiveFormat = "#,##0 ¤"
+            formatter.negativeFormat = "#,##0 ¤ -"
+            
+        }
+        else {
                 // 그 외의 통화일 경우
                 formatter.positiveFormat = "¤ #,##0"
-                formatter.negativeFormat = "-¤ #,##0"
+                formatter.negativeFormat = "- ¤ #,##0"
             }
 
             // 적용된 형식을 UserDefaults에 저장 (EditExpenseView, AddExpenseView에서 사용할 수 있도록)

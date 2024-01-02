@@ -21,7 +21,6 @@ struct ExpenseCardView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(expense.title)
-                    .font(.custom("NotoSansArabic-Medium", size: 20))
                 makeCapsule()
             }
             .lineLimit(nil)
@@ -29,7 +28,7 @@ struct ExpenseCardView: View {
             Spacer(minLength: 5)
             
             Text(formatCurrency(amount: expense.amount))
-                .font(.custom("NotoSansArabic-Medium", size: 20))
+//                .font(.custom("NotoSansArabic-Medium", size: 17))
         }
         .onAppear {
             color = settingsViewModel.color
@@ -70,16 +69,17 @@ struct ExpenseCardView: View {
                 if selectedCurrency == "원" {
                     savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
                     savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
-                } else if ["د.إ", "ب.د", "د.ج", "ع.د", "د.ا", "د.ك", "ل.د", "د.م.", "ރ.", "ر.ع.", "ر.ق", "ر.س", "ل.س", "د.ت", "﷼"].contains(selectedCurrency)
+                } else if ["د.إ", "ب.د", "د.ج", "ع.د", "د.ا", "د.ك", "ل.د", "د.م.", "ރ.", "ر.ع.", "ر.ق", "ر.س", "ل.س", "د.ت", "﷼","ج.م"].contains(selectedCurrency)
                 {
                     // 특정 통화일 경우
                     formatter.currencySymbol = ""
                     print(selectedCurrency)
-                    
-                    // 폰트 설정 예제 (원하는 폰트와 크기로 수정)
-                    let customFont = Font.custom("NotoSansArabic-Medium", size: 20)
                     Text("\(formatter.currencySymbol)")
-                        .font(customFont)
+
+                    // 폰트 설정 예제 (원하는 폰트와 크기로 수정)
+//                    let customFont = Font.custom("NotoSansArabic-Medium", size: 17)
+//                        .font(customFont)
+                    
                 }
                 else {
                     savedFormatter.positiveFormat = " \(selectedCurrency) #,##0.##"
