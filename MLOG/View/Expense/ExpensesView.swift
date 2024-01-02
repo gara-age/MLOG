@@ -307,6 +307,8 @@ struct ExpensesView: View {
                     })) { expense in
 
                         ExpenseCardView(expense: expense)
+                        
+                            .font(.custom("NotoSansArabic-Medium", size: 20))
                             .environmentObject(settingsViewModel)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button {

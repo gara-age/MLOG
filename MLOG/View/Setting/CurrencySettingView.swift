@@ -183,6 +183,8 @@ struct CurrencySettingView: View {
                         selectedCurrency = currency.symbol
                         selectedCurrencyName = String(currency.name.prefix(4)) // Take the first 4 characters
                           UserDefaults.standard.set(selectedCurrency, forKey: "selectedCurrency")
+                        updateCurrencyFormats(for: currency.symbol) // 여기에서 업데이트 함수 호출
+
                           dismiss()
                         // 여기에서 필요한 작업 수행
                     } label: {
@@ -217,13 +219,13 @@ struct CurrencySettingView: View {
     }
     private func updateCurrencyFormats(for currencySymbol: String) {
             let formatter = NumberFormatter()
-            formatter.currencySymbol = "currencySymbol"
+            formatter.currencySymbol = currencySymbol
         
 
         if currencySymbol == "원" {
             // 대한민국 원화일 경우
-            formatter.positiveFormat = "#,##0 원"
-            formatter.negativeFormat = "-#,##0 원"
+            formatter.positiveFormat = "#,##0원"
+            formatter.negativeFormat = "-#,##0원"
         } else {
                 // 그 외의 통화일 경우
                 formatter.positiveFormat = "¤ #,##0"

@@ -11,40 +11,41 @@ import SwiftUI
 struct ExpenseCardView: View {
     @Bindable var expense: Expense
     @AppStorage("selectedCurrency") private var selectedCurrency: String?
-
+    
     var displayTag: Bool = true
     @State private var color: Color = .green
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
-
-
+    
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(expense.title)
+                    .font(.custom("NotoSansArabic-Medium", size: 20))
                 makeCapsule()
             }
             .lineLimit(nil)
-
+            
             Spacer(minLength: 5)
-
+            
             Text(formatCurrency(amount: expense.amount))
-                .font(.title3.bold())
+                .font(.custom("NotoSansArabic-Medium", size: 20))
         }
         .onAppear {
             color = settingsViewModel.color
-                }
+        }
         .onChange(of: color) { _ in
-            }
+        }
         .onChange(of: settingsViewModel.Changed) { newValue in
             settingsViewModel.Changed = newValue
         }
     }
-
+    
     @ViewBuilder
     private func makeCapsule() -> some View {
         if let categoryName = expense.category?.categoryName, displayTag {
             let categoryColor = settingsViewModel.getCategoryColor(expense.category)
-
+            
             Text(categoryName)
                 .font(.caption2)
                 .foregroundStyle(.white)
@@ -54,35 +55,49 @@ struct ExpenseCardView: View {
             
         }
     }
-//로케일 설정 필요
+    //로케일 설정 필요
     func formatCurrency(amount: Double) -> String {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.currencySymbol = ""
-
-            if let selectedCurrency = selectedCurrency {
-                // UserDefaults에서 저장된 NumberFormatter 불러오기
-                if let data = UserDefaults.standard.value(forKey: "currencyFormatter") as? Data,
-                   let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
-
-                    // 음수와 양수에 대한 형식 적용
-                    if selectedCurrency == "원" {
-                        savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
-                        savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
-                    } else {
-                        savedFormatter.positiveFormat = " \(selectedCurrency) #,##0.##"
-                        savedFormatter.negativeFormat = "- \(selectedCurrency) #,##0.##"
-                    }
-
-                    // 금액 포맷팅
-                    if let formattedString = savedFormatter.string(for: amount) {
-                        return formattedString 
-                    }
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.currencySymbol = selectedCurrency
+        
+        if let selectedCurrency = selectedCurrency {
+            // UserDefaults에서 저장된 NumberFormatter 불러오기
+            if let data = UserDefaults.standard.value(forKey: "currencyFormatter") as? Data,
+               let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
+                //print(selectedCurrency)
+                // 음수와 양수에 대한 형식 적용
+                if selectedCurrency == "원" {
+                    savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
+                    savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
+                } else if ["د.إ", "ب.د", "د.ج", "ع.د", "د.ا", "د.ك", "ل.د", "د.م.", "ރ.", "ر.ع.", "ر.ق", "ر.س", "ل.س", "د.ت", "﷼"].contains(selectedCurrency)
+                {
+                    // 특정 통화일 경우
+                    formatter.currencySymbol = ""
+                    print(selectedCurrency)
+                    
+                    // 폰트 설정 예제 (원하는 폰트와 크기로 수정)
+                    let customFont = Font.custom("NotoSansArabic-Medium", size: 20)
+                    Text("\(formatter.currencySymbol)")
+                        .font(customFont)
+                }
+                else {
+                    savedFormatter.positiveFormat = " \(selectedCurrency) #,##0.##"
+                    savedFormatter.negativeFormat = "- \(selectedCurrency) #,##0.##"
+                    
+                }
+                
+                // 금액 포맷팅
+                if let formattedString = savedFormatter.string(for: amount) {
+                    print(formattedString)
+                    
+                    return formattedString
                 }
             }
-
-            // 기본값
-            return "\(amount) \(selectedCurrency ?? "")"
         }
-
+        print("\(amount) \(selectedCurrency ?? "")")
+        // 기본값
+        return "\(amount) \(selectedCurrency ?? "")"
+    }
+    
 }

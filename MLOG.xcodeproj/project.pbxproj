@@ -11,6 +11,7 @@
 		3717FC802B3AF80400437683 /* CurrencySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717FC7F2B3AF80400437683 /* CurrencySettingView.swift */; };
 		371B668B2AFB389E00741C91 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B668A2AFB389E00741C91 /* AddExpenseView.swift */; };
 		371B668D2AFB50C700741C91 /* ExpenseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B668C2AFB50C700741C91 /* ExpenseCardView.swift */; };
+		375DC8522B43D43D007C56CB /* NotoSansArabic-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 375DC8512B43D43D007C56CB /* NotoSansArabic-Medium.ttf */; };
 		376331A72B2C5C9E0043CA14 /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376331A62B2C5C9E0043CA14 /* EditExpenseView.swift */; };
 		376331A92B2C5E350043CA14 /* AddCategorySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376331A82B2C5E350043CA14 /* AddCategorySheetView.swift */; };
 		376331AB2B2D2CE90043CA14 /* EditCategorySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376331AA2B2D2CE90043CA14 /* EditCategorySheetView.swift */; };
@@ -40,6 +41,8 @@
 		3717FC7F2B3AF80400437683 /* CurrencySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySettingView.swift; sourceTree = "<group>"; };
 		371B668A2AFB389E00741C91 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		371B668C2AFB50C700741C91 /* ExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCardView.swift; sourceTree = "<group>"; };
+		375DC8512B43D43D007C56CB /* NotoSansArabic-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansArabic-Medium.ttf"; sourceTree = "<group>"; };
+		375DC8532B43D458007C56CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		376331A62B2C5C9E0043CA14 /* EditExpenseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
 		376331A82B2C5E350043CA14 /* AddCategorySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategorySheetView.swift; sourceTree = "<group>"; };
 		376331AA2B2D2CE90043CA14 /* EditCategorySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategorySheetView.swift; sourceTree = "<group>"; };
@@ -83,6 +86,23 @@
 				06523A5246B14AD0A899DA4E /* Pods_MLOG.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		375DC84F2B43D414007C56CB /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				375DC8502B43D425007C56CB /* Fonts */,
+				37AF56FF2B11B9D400E2A4AD /* Anim1.json */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		375DC8502B43D425007C56CB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				375DC8512B43D43D007C56CB /* NotoSansArabic-Medium.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		376331AC2B2D631F0043CA14 /* Category */ = {
@@ -137,7 +157,8 @@
 		378F174A2AFAA9DB0033112C /* MLOG */ = {
 			isa = PBXGroup;
 			children = (
-				37AF56FF2B11B9D400E2A4AD /* Anim1.json */,
+				375DC8532B43D458007C56CB /* Info.plist */,
+				375DC84F2B43D414007C56CB /* Source */,
 				378F175C2AFAAC400033112C /* Model */,
 				378F175B2AFAAC350033112C /* View */,
 				378F174B2AFAA9DB0033112C /* MLOG.swift */,
@@ -254,6 +275,7 @@
 			files = (
 				378F17552AFAA9DC0033112C /* Preview Assets.xcassets in Resources */,
 				37AF57002B11B9D400E2A4AD /* Anim1.json in Resources */,
+				375DC8522B43D43D007C56CB /* NotoSansArabic-Medium.ttf in Resources */,
 				378F17522AFAA9DC0033112C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +491,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MLOG/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "M'LOG";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -504,6 +527,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MLOG/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "M'LOG";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
