@@ -28,7 +28,6 @@ struct ExpensesView: View {
     @State private var addedCategory: Category?
     @State private var selectedExpense: Expense?
     @State private var setCurrency: Bool = false
-    @Binding var isToolBarClicked: Bool
     @State private var deleteRequest: Bool = false
      
     //검색기능
@@ -46,7 +45,8 @@ struct ExpensesView: View {
     @State private var selectedExpenseForDeletion: Expense?
     @State private var showCategoryThemeSettingView = false
 
-    
+    @Binding var isFloatingButtonClicked: Bool
+
     enum DateFilter: String, CaseIterable {
         
         case all = "전체 내역"
@@ -113,6 +113,7 @@ struct ExpensesView: View {
                 expensesListView()
                     .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Text("검색"))
                     .navigationTitle("지출 내역")
+                    .navigationBarTitleDisplayMode(.inline)
                     .overlay{
                         if allExpenses.isEmpty || groupedExpenses.isEmpty {
                             ContentUnavailableView{
@@ -120,73 +121,68 @@ struct ExpensesView: View {
                             }
                         }
                     }
-                    .toolbar(content: {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Menu(content: {
-                                Button {
-                                    addExpense.toggle()
-                                    isToolBarClicked = false
-
-                                }
-                            label: {
-                                Label("내역 추가", systemImage: "note.text.badge.plus")
-                            }
-                            .sheet(isPresented: $addExpense) {
-                                AddExpenseView()
-                                    .interactiveDismissDisabled()
-                            }
-                                
-                                Button {
-                                    addCategory.toggle()
-                                    isToolBarClicked = false
-
-                                }
-                            label: {
-                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
-                            }
-                            .sheet(isPresented: $addCategory) {
-                                AddCategorySheetView(
-                                    categoryName: $categoryName,
-                                    addCategory: $addCategory,
-                                    showCategoryThemeSettingView: $showCategoryThemeSettingView
-                                )
-                            }
-                             
-                                
-                                Button {
-                                    showCategoryThemeSettingView.toggle()
-                                    isToolBarClicked = false
-                                }
-                            label: {
-                                Label("카테고리 테마 지정", systemImage: "paintpalette")
-                            }
-                            .sheet(isPresented: $showCategoryThemeSettingView) {
-                                CategoryThemeSettingView()
-                            }
-                            
-                                
-                                Button {
-                                    setCurrency.toggle()
-                                    isToolBarClicked = false
-                                }
-                            label: {
-                                Label("통화 설정", systemImage: "dollarsign")
-                            }
-                            .sheet(isPresented: $setCurrency) {
-                                CurrencySettingView()
-                                    .interactiveDismissDisabled()
-                            }
-                            }) {
-                                Image(systemName: "plus")
-                                    
-                                
-                            }
-                            .onTapGesture {
-                                isToolBarClicked = true
-
-                                           }
-                        }
-                    })
+//                    .toolbar(content: {
+//                        ToolbarItem(placement: .topBarTrailing) {
+//                            Menu(content: {
+//                                Button {
+//                                    addExpense.toggle()
+//
+//                                }
+//                            label: {
+//                                Label("내역 추가", systemImage: "note.text.badge.plus")
+//                            }
+//                            .sheet(isPresented: $addExpense) {
+//                                AddExpenseView()
+//                                    .interactiveDismissDisabled()
+//                            }
+//                                
+//                                Button {
+//                                    addCategory.toggle()
+//                                     
+//
+//                                }
+//                            label: {
+//                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
+//                            }
+//                            .sheet(isPresented: $addCategory) {
+//                                AddCategorySheetView(
+//                                    categoryName: $categoryName,
+//                                    addCategory: $addCategory,
+//                                    showCategoryThemeSettingView: $showCategoryThemeSettingView
+//                                )
+//                            }
+//                             
+//                                
+//                                Button {
+//                                    showCategoryThemeSettingView.toggle()
+//                                     
+//                                }
+//                            label: {
+//                                Label("카테고리 테마 지정", systemImage: "paintpalette")
+//                            }
+//                            .sheet(isPresented: $showCategoryThemeSettingView) {
+//                                CategoryThemeSettingView()
+//                            }
+//                            
+//                                
+//                                Button {
+//                                    setCurrency.toggle()
+//                                     
+//                                }
+//                            label: {
+//                                Label("통화 설정", systemImage: "dollarsign")
+//                            }
+//                            .sheet(isPresented: $setCurrency) {
+//                                CurrencySettingView()
+//                                    .interactiveDismissDisabled()
+//                            }
+//                            }) {
+//                                Image(systemName: "plus")
+//                                    
+//                                
+//                            }
+//                        }
+//                    })
                     .blur(radius: showFilterView ? 8 : 0)
                     .disabled(showFilterView)
                     .overlay{
@@ -211,8 +207,9 @@ struct ExpensesView: View {
                    
                 
                 
-                
             }
+            FloatingButtonView(addExpense: $addExpense, addCategory: $addCategory, showCategoryThemeSettingView : $showCategoryThemeSettingView, setCurrency: $setCurrency, isFloatingButtonClicked: $isFloatingButtonClicked)
+
         }
         
         .onAppear {

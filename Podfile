@@ -7,4 +7,6 @@ target 'MLOG' do
 
   # Pods for MLOG
 pod 'lottie-ios' 
+pod 'Google-Mobile-Ads-SDK'
+
 end

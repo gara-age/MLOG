@@ -10,7 +10,7 @@ import SwiftUI
 struct FloatingButtonView: View {
     @Binding var addExpense: Bool
     @Binding var addCategory: Bool
-    @Binding var setColor: Bool
+    @Binding var showCategoryThemeSettingView: Bool
     @Binding var setCurrency: Bool
     @Binding var isFloatingButtonClicked: Bool
     
@@ -37,13 +37,13 @@ struct FloatingButtonView: View {
                                 .interactiveDismissDisabled()
                         }
                             Button {
-                                setColor.toggle()
+                                showCategoryThemeSettingView.toggle()
                                 isFloatingButtonClicked = false
                             }
                         label: {
                             Label("카테고리 테마 지정", systemImage: "paintpalette")
                         }
-                        .sheet(isPresented: $setColor) {
+                        .sheet(isPresented: $showCategoryThemeSettingView) {
                             CategoryThemeSettingView()
                                 .interactiveDismissDisabled()
                         }
