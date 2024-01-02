@@ -162,7 +162,6 @@ struct ExpensesView: View {
                             }
                             .sheet(isPresented: $showCategoryThemeSettingView) {
                                 CategoryThemeSettingView()
-                                    .interactiveDismissDisabled()
                             }
                             
                                 
@@ -256,7 +255,6 @@ struct ExpensesView: View {
         }
         .sheet(isPresented: $showCategoryThemeSettingView) {
             CategoryThemeSettingView()
-                .interactiveDismissDisabled()
         }
         .sheet(item: $selectedExpense) { expense in
             EditExpenseView(expense: expense)
@@ -318,17 +316,14 @@ struct ExpensesView: View {
                                         Image(systemName: "trash")
                                     }
                                     .tint(.delete)
+                                Button {
+                                    editExpense(expense)
+                                } label: {
+                                    Image(systemName: "pencil")
+
+                                }
+                                .tint(.edit)
                             }
-
-                            .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                    
-                                    Button {
-                                        editExpense(expense)
-                                    } label: {
-                                        Image(systemName: "pencil")
-
-                                    }
-                                    .tint(.edit)                            }
                     }
                 }
             }
@@ -368,7 +363,7 @@ struct ExpensesView: View {
         selectedSortOrder = .latestFirst
         selectedTransactionType = .all
         searchText = ""
-                filterExpenses("")
+        filterExpenses("")
         latestFirst = true
     }
     private func menuView() -> some View {

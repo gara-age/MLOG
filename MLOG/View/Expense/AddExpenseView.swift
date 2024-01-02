@@ -97,57 +97,109 @@ struct AddExpenseView: View {
                 Section("금액") {
                     HStack{
                         HStack{
-                            TextField("0", text: $amountString)
-                                .keyboardType(.decimalPad)
-                                .focused($isInputActive)
-                                .onChange(of: amountString, perform: { value in
-                                    // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
-                                    let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
-                                    let formattedString = formatNumberString(amountWithoutSeparator)
-                                    
-                                    // 소수점 이후 부분에만 , 추가
-                                    if value.contains(".") {
-                                        let components = value.components(separatedBy: ".")
-                                        if components.count == 1 {
-                                            let decimalPart = components[1]
-                                            
-                                            // 숫자를 2자리로 제한
+                            if selectedCurrency == "원" {
+                                TextField("0", text: $amountString)
+                                    .keyboardType(.decimalPad)
+                                    .focused($isInputActive)
+                                    .onChange(of: amountString, perform: { value in
+                                        // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
+                                        let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
+                                        let formattedString = formatNumberString(amountWithoutSeparator)
+                                        
+                                        // 소수점 이후 부분에만 , 추가
+                                        if value.contains(".") {
+                                            let components = value.components(separatedBy: ".")
+                                            if components.count == 1 {
+                                                let decimalPart = components[1]
+                                                
+                                                // 숫자를 2자리로 제한
+                                                if decimalPart.count > 2 {
+                                                    let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                    amountString = formattedString + "." + decimalPart[..<index]
+                                                } else {
+                                                    amountString = formattedString + "." + decimalPart
+                                                }
+                                            }
+                                        } else {
+                                            amountString = formattedString
+                                        }
+                                        
+                                        // 추가: 소수점 이하 숫자 자릿수 제한
+                                        if let decimalIndex = amountString.firstIndex(of: ".") {
+                                            let decimalPart = amountString.suffix(from: decimalIndex).dropFirst()
                                             if decimalPart.count > 2 {
                                                 let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
-                                                amountString = formattedString + "." + decimalPart[..<index]
-                                            } else {
-                                                amountString = formattedString + "." + decimalPart
+                                                amountString = amountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
                                             }
                                         }
-                                    } else {
-                                        amountString = formattedString
-                                    }
-                                    
-                                    // 추가: 소수점 이하 숫자 자릿수 제한
-                                    if let decimalIndex = amountString.firstIndex(of: ".") {
-                                        let decimalPart = amountString.suffix(from: decimalIndex).dropFirst()
-                                        if decimalPart.count > 2 {
-                                            let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
-                                            amountString = amountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
+                                    })
+                                
+                                
+                                
+                                //로케일 설정 필요
+                                
+                                Text(selectedCurrency)
+                                    .fontWeight(.semibold)
+                                    .toolbar {
+                                        ToolbarItemGroup(placement: .keyboard) {
+                                            Spacer()
+                                            
+                                            Button("Done") {
+                                                isInputActive = false
+                                            }
                                         }
                                     }
-                                })
-                            
-                            
-                            
-                            //로케일 설정 필요
-                            
-                            Text(selectedCurrency)
-                                .fontWeight(.semibold)
-                                .toolbar {
-                                    ToolbarItemGroup(placement: .keyboard) {
-                                        Spacer()
+                            } else {
+                                Spacer(minLength: 10)
+                                Text(selectedCurrency)
+                                    .fontWeight(.semibold)
+                                    .toolbar {
+                                        ToolbarItemGroup(placement: .keyboard) {
+                                            Spacer()
+                                            
+                                            Button("Done") {
+                                                isInputActive = false
+                                            }
+                                        }
+                                    }
+                                
+                                
+                                TextField("0", text: $amountString)
+                                    .keyboardType(.decimalPad)
+                                    .focused($isInputActive)
+                                    .onChange(of: amountString, perform: { value in
+                                        // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
+                                        let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
+                                        let formattedString = formatNumberString(amountWithoutSeparator)
                                         
-                                        Button("Done") {
-                                            isInputActive = false
+                                        // 소수점 이후 부분에만 , 추가
+                                        if value.contains(".") {
+                                            let components = value.components(separatedBy: ".")
+                                            if components.count == 1 {
+                                                let decimalPart = components[1]
+                                                
+                                                // 숫자를 2자리로 제한
+                                                if decimalPart.count > 2 {
+                                                    let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                    amountString = formattedString + "." + decimalPart[..<index]
+                                                } else {
+                                                    amountString = formattedString + "." + decimalPart
+                                                }
+                                            }
+                                        } else {
+                                            amountString = formattedString
                                         }
-                                    }
-                                }
+                                        
+                                        // 추가: 소수점 이하 숫자 자릿수 제한
+                                        if let decimalIndex = amountString.firstIndex(of: ".") {
+                                            let decimalPart = amountString.suffix(from: decimalIndex).dropFirst()
+                                            if decimalPart.count > 2 {
+                                                let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                amountString = amountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
+                                            }
+                                        }
+                                    })
+                            }
                         }.multilineTextAlignment(.trailing)
                         
                     }

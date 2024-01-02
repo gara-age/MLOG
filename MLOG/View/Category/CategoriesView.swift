@@ -456,34 +456,41 @@ struct CategorySectionView: View {
     let category: Category
 
     func formatCurrency(amount: Double) -> String {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.currencySymbol = ""
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.currencySymbol = selectedCurrency
+        
+        if let selectedCurrency = selectedCurrency {
+            // UserDefaults에서 저장된 NumberFormatter 불러오기
+            if let data = UserDefaults.standard.value(forKey: "currencyFormatter") as? Data,
+               let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
+                // 음수와 양수에 대한 형식 적용
+                if selectedCurrency == "원" {
+                    savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
+                    savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
+                } else if ["د.إ", "ب.د", "د.ج", "ع.د", "د.ا", "د.ك", "ل.د", "د.م.", "ރ.", "ر.ع.", "ر.ق", "ر.س", "ل.س", "د.ت", "﷼","ج.م"].contains(selectedCurrency)
+                {
+                    // 특정 통화일 경우
+                    formatter.currencySymbol = ""
+                    Text("\(formatter.currencySymbol)")
 
-            if let selectedCurrency = selectedCurrency {
-                // UserDefaults에서 저장된 NumberFormatter 불러오기
-                if let data = UserDefaults.standard.value(forKey: "currencyFormatter") as? Data,
-                   let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
-
-                    // 음수와 양수에 대한 형식 적용
-                    if selectedCurrency == "원" {
-                        savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
-                        savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
-                    } else {
-                        savedFormatter.positiveFormat = "\(selectedCurrency) #,##0.##"
-                        savedFormatter.negativeFormat = "- \(selectedCurrency) #,##0.##"
-                    }
-
-                    // 금액 포맷팅
-                    if let formattedString = savedFormatter.string(for: amount) {
-                        return formattedString
-                    }
+                }
+                else {
+                    savedFormatter.positiveFormat = " \(selectedCurrency) #,##0.##"
+                    savedFormatter.negativeFormat = "- \(selectedCurrency) #,##0.##"
+                    
+                }
+                
+                // 금액 포맷팅
+                if let formattedString = savedFormatter.string(for: amount) {
+                    
+                    return formattedString
                 }
             }
-
-            // 기본값
-            return "\(amount) \(selectedCurrency ?? "")"
         }
+        // 기본값
+        return "\(amount) \(selectedCurrency ?? "")"
+    }
     func sortedExpenses(for category: Category) -> [Expense]? {
         return allExpenses.filter { $0.category == category }.sorted(by: { $0.date < $1.date })
     }
@@ -518,19 +525,10 @@ struct CategorySectionView: View {
                             Text(expense.date, formatter: dateFormatter)
                                 .textScale(.secondary)
                             ExpenseCardView(expense: expense, displayTag: false)
-//                                .font(.custom("NotoSansArabic-Medium", size: 17))
 
                                 .environmentObject(settingsViewModel)
                         }
-                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                           // 카테고리 수정 버튼 눌렀을 때의 동작
-                                           Button {
-                                               editExpense(expense)
-                                           } label: {
-                                               Image(systemName: "pencil")
-                                           }
-                                           .tint(.edit)
-                                       }
+                       
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button {
                                 deleteExpense(expense)
@@ -538,6 +536,12 @@ struct CategorySectionView: View {
                                 Image(systemName: "trash")
                             }
                             .tint(.delete)
+                            Button {
+                                editExpense(expense)
+                            } label: {
+                                Image(systemName: "pencil")
+                            }
+                            .tint(.edit)
                         }
 
                         

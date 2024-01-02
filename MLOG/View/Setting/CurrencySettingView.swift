@@ -10,14 +10,15 @@ import SwiftUI
 struct CurrencySettingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText: String = ""
-    @AppStorage("selectedCurrency") private var selectedCurrency: String = ""
+    @AppStorage("selectedCurrency") private var selectedCurrency: String = "원"
+    @AppStorage("selectedCurrencyID") private var selectedCurrencyID: String = "원🇰🇷KRW   대한민국   -   원"
     @State private var selectedCurrencyName: String = ""
+    
     struct Currency: Identifiable {
-            var id: String { symbol + name}
-            let symbol: String
-            let name: String
-        
-        }
+        var id: String { symbol + name }
+        let symbol: String
+        let name: String
+    }
 
     let currencies: [Currency] = [
         
@@ -168,7 +169,7 @@ struct CurrencySettingView: View {
             Currency(symbol: "Vt", name: "🇻🇺VUV   바누아투   -   바투"),
             Currency(symbol: "T", name: "🇼🇸WST   사모아   -   탈라"),
             Currency(symbol: "$", name: "🇩🇲XCD   도미니카   -   동카리브 달러"),
-            Currency(symbol: "﷼", name: "🇾🇪YER   예멘 리알"), //표기안됨
+            Currency(symbol: "﷼", name: "🇾🇪YER   예멘   -   리알"), //표기안됨
             Currency(symbol: "R", name: "🇿🇦ZAR   남아프리카   -   란드"),
             Currency(symbol: "ZK", name: "🇿🇲ZMW   잠비아   -   크와차"),
             Currency(symbol: "$", name: "🇿🇼ZWL   짐바브웨   -   달러")
@@ -177,32 +178,35 @@ struct CurrencySettingView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(currencies.filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }) { currency in
-                    Button {
-                        selectedCurrency = currency.symbol
-                        selectedCurrencyName = String(currency.name.prefix(4)) // Take the first 4 characters
-                          UserDefaults.standard.set(selectedCurrency, forKey: "selectedCurrency")
-                        updateCurrencyFormats(for: currency.symbol) // 여기에서 업데이트 함수 호출
-
-                          dismiss()
-                        // 여기에서 필요한 작업 수행
-                    } label: {
-                        HStack {
-                            Text("\(currency.name)")
-                                .foregroundStyle(Color.black)
-                        }
-                        .contentShape(Rectangle())
-                    }
-                }
-                
-            }
-            .onAppear {
-                selectedCurrency = UserDefaults.standard.string(forKey: "selectedCurrency") ?? "원"
-                if let selectedCurrencyObject = currencies.first(where: { $0.symbol == selectedCurrency }) {
-                                   selectedCurrencyName = String(selectedCurrencyObject.name.prefix(4))
+                   List {
+                       ForEach(currencies.filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }) { currency in
+                           Button {
+                               selectedCurrencyID = currency.id
+                               selectedCurrency = currency.symbol
+                               selectedCurrencyName = String(currency.name.prefix(4))
+                               UserDefaults.standard.set(selectedCurrency, forKey: "selectedCurrency")
+                               UserDefaults.standard.set(selectedCurrencyID, forKey: "selectedCurrencyID")
+                               updateCurrencyFormats(for: currency.symbol)
+                               dismiss()
+                           } label: {
+                               HStack {
+                                   Text("\(currency.name)")
+                                       .foregroundStyle(Color.black)
                                }
+                               .contentShape(Rectangle())
+                           }
                        }
+                   }
+                   .onAppear {
+                       selectedCurrencyID = UserDefaults.standard.string(forKey: "selectedCurrencyID") ?? currencies.first?.id ?? ""
+               selectedCurrency = UserDefaults.standard.string(forKey: "selectedCurrency") ?? "원"
+                       if let selectedCurrencyObject = currencies.first(where: { $0.id == selectedCurrencyID }) {
+                           selectedCurrencyName = String(selectedCurrencyObject.name.prefix(4))
+                       }
+               if let selectedCurrencyObject = currencies.first(where: { $0.symbol == selectedCurrencyID }) {
+                           selectedCurrencyName = String(selectedCurrencyObject.name.prefix(4))
+                       }
+                   }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("검색"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("현재 통화: \(selectedCurrencyName)")

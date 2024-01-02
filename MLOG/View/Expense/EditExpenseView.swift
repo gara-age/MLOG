@@ -115,51 +115,99 @@ struct EditExpenseView: View {
                 Section("금액") {
                     HStack{
                         HStack{
-                            TextField(amountString, text: $inputAmountString)
-                                .keyboardType(.decimalPad)
-                                .focused($isInputActive)
-                                .onChange(of: inputAmountString, perform: { value in
-                                    // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
-                                    let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
-                                    let formattedString = formatNumberString(amountWithoutSeparator)
-                                    
-                                    if value.contains(".") {
-                                        let components = value.components(separatedBy: ".")
-                                        if components.count == 1 {
-                                            let decimalPart = components[1]
+                            if selectedCurrency == "원" {
+                                TextField(amountString, text: $inputAmountString)
+                                    .keyboardType(.decimalPad)
+                                    .focused($isInputActive)
+                                    .onChange(of: inputAmountString, perform: { value in
+                                        // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
+                                        let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
+                                        let formattedString = formatNumberString(amountWithoutSeparator)
+                                        
+                                        if value.contains(".") {
+                                            let components = value.components(separatedBy: ".")
+                                            if components.count == 1 {
+                                                let decimalPart = components[1]
+                                                if decimalPart.count > 2 {
+                                                    let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                    inputAmountString = formattedString + "." + decimalPart[..<index]
+                                                } else {
+                                                    inputAmountString = formattedString + "." + decimalPart
+                                                }
+                                            }
+                                        } else {
+                                            inputAmountString = formattedString
+                                        }
+                                        
+                                        // 추가: 소수점 이하 숫자 자릿수 제한
+                                        if let decimalIndex = inputAmountString.firstIndex(of: ".") {
+                                            let decimalPart = inputAmountString.suffix(from: decimalIndex).dropFirst()
                                             if decimalPart.count > 2 {
                                                 let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
-                                                inputAmountString = formattedString + "." + decimalPart[..<index]
-                                            } else {
-                                                inputAmountString = formattedString + "." + decimalPart
+                                                inputAmountString = inputAmountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
                                             }
                                         }
-                                    } else {
-                                        inputAmountString = formattedString
-                                    }
-                                    
-                                    // 추가: 소수점 이하 숫자 자릿수 제한
-                                    if let decimalIndex = inputAmountString.firstIndex(of: ".") {
-                                        let decimalPart = inputAmountString.suffix(from: decimalIndex).dropFirst()
-                                        if decimalPart.count > 2 {
-                                            let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
-                                            inputAmountString = inputAmountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
+                                    })
+                                //로케일 설정 필요
+                                
+                                Text(selectedCurrency)
+                                    .fontWeight(.semibold)
+                                    .toolbar {
+                                        ToolbarItemGroup(placement: .keyboard) {
+                                            Spacer()
+                                            
+                                            Button("완료") {
+                                                isInputActive = false
+                                            }
                                         }
                                     }
-                                })
-                            //로케일 설정 필요
-                            
-                            Text(selectedCurrency)
-                                .fontWeight(.semibold)
-                                .toolbar {
-                                    ToolbarItemGroup(placement: .keyboard) {
-                                        Spacer()
+                            } else {
+                                Spacer(minLength: 5)
+                                Text(selectedCurrency)
+                                    .fontWeight(.semibold)
+                                    .toolbar {
+                                        ToolbarItemGroup(placement: .keyboard) {
+                                            Spacer()
+                                            
+                                            Button("완료") {
+                                                isInputActive = false
+                                            }
+                                        }
+                                    }
+                                
+                                TextField(amountString, text: $inputAmountString)
+                                    .keyboardType(.decimalPad)
+                                    .focused($isInputActive)
+                                    .onChange(of: inputAmountString, perform: { value in
+                                        // 구분 기호 제거 후 숫자로 변환하여 포맷 적용
+                                        let amountWithoutSeparator = value.replacingOccurrences(of: ",", with: "")
+                                        let formattedString = formatNumberString(amountWithoutSeparator)
                                         
-                                        Button("완료") {
-                                            isInputActive = false
+                                        if value.contains(".") {
+                                            let components = value.components(separatedBy: ".")
+                                            if components.count == 1 {
+                                                let decimalPart = components[1]
+                                                if decimalPart.count > 2 {
+                                                    let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                    inputAmountString = formattedString + "." + decimalPart[..<index]
+                                                } else {
+                                                    inputAmountString = formattedString + "." + decimalPart
+                                                }
+                                            }
+                                        } else {
+                                            inputAmountString = formattedString
                                         }
-                                    }
-                                }
+                                        
+                                        // 추가: 소수점 이하 숫자 자릿수 제한
+                                        if let decimalIndex = inputAmountString.firstIndex(of: ".") {
+                                            let decimalPart = inputAmountString.suffix(from: decimalIndex).dropFirst()
+                                            if decimalPart.count > 2 {
+                                                let index = decimalPart.index(decimalPart.startIndex, offsetBy: 2)
+                                                inputAmountString = inputAmountString.prefix(upTo: decimalIndex) + "." + decimalPart.prefix(upTo: index)
+                                            }
+                                        }
+                                    })
+                            }
                         }.multilineTextAlignment(.trailing)
                         
                     }
