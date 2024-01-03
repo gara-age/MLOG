@@ -22,15 +22,15 @@ struct AddCategorySheetView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("카테고리명") {
-                    TextField("카테고리명을 입력해주세요.", text: $categoryName)
+                Section(NSLocalizedString("카테고리명", comment:"")) {
+                    TextField(NSLocalizedString("카테고리명을 입력해주세요.", comment:""), text: $categoryName)
                 }
             }
-            .navigationTitle("새 카테고리 이름")
+            .navigationTitle(NSLocalizedString("새 카테고리명", comment:""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("취소") {
+                    Button(NSLocalizedString("취소", comment:"")) {
                         addCategory = false
                         categoryName = ""
                     }
@@ -38,7 +38,7 @@ struct AddCategorySheetView: View {
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("추가") {
+                    Button(NSLocalizedString("추가", comment:"")) {
                         
                         let category = Category(id: UUID(), categoryName: categoryName)
                         context.insert(category)

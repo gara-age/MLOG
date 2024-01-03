@@ -12,7 +12,7 @@ import GoogleMobileAds
 struct ContentView: View {
     
     
-    @State private var currentTab: String = "전체 내역"
+    @State private var currentTab: String = NSLocalizedString("전체 내역", comment:"")
     @State var addExpense: Bool = false
     @State  var addCategory: Bool = false
     @State  var setting: Bool = false
@@ -29,18 +29,18 @@ struct ContentView: View {
                 TabView(selection: $currentTab){
                     
                     ExpensesView(currentTab: $currentTab, isFloatingButtonClicked: $isFloatingButtonClicked)
-                        .tag("모든내역")
+                        .tag("전체 내역")
                         .tabItem {
                             Image(systemName: "creditcard.fill")
-                            Text("모든 내역")
+                            Text(NSLocalizedString("전체 내역", comment:""))
                         }
                     
                     
                     CategoriesView(isFloatingButtonClicked: $isFloatingButtonClicked)
-                        .tag("카테고리")
+                        .tag(NSLocalizedString("카테고리", comment:""))
                         .tabItem {
                             Image(systemName: "list.clipboard.fill")
-                            Text("카테고리")
+                            Text(NSLocalizedString("카테고리", comment:""))
                         }
                 }
             }
@@ -71,10 +71,7 @@ struct ContentView: View {
             
         }
         //앱을 처음 실행할때만 통화설정 창 열림
-        .sheet(isPresented: $setting, onDismiss: {
-            // CurrencySettingView가 닫힐 때 실행되는 코드
-            print("CurrencySettingView dismissed")
-        }) {
+        .sheet(isPresented: $setting) {
             CurrencySettingView()
         }
         .onAppear{

@@ -29,7 +29,7 @@ struct FloatingButtonView: View {
                                 isFloatingButtonClicked = false
                             }
                         label: {
-                            Label("통화 설정", systemImage: "dollarsign")
+                            Label(NSLocalizedString("통화 설정", comment:""), systemImage: "dollarsign")
                         }
                         .sheet(isPresented: $setCurrency) {
                             CurrencySettingView()
@@ -40,7 +40,7 @@ struct FloatingButtonView: View {
                                 isFloatingButtonClicked = false
                             }
                         label: {
-                            Label("카테고리 테마 지정", systemImage: "paintpalette")
+                            Label(NSLocalizedString("카테고리 테마 지정", comment:""), systemImage: "paintpalette")
                         }
                         .sheet(isPresented: $showCategoryThemeSettingView) {
                             CategoryThemeSettingView()
@@ -52,7 +52,7 @@ struct FloatingButtonView: View {
                                 
                             }
                         label: {
-                            Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
+                            Label(NSLocalizedString("카테고리 추가", comment:""), systemImage: "square.grid.3x1.folder.badge.plus")
                         }
                         .sheet(isPresented: $addCategory) {
                         }
@@ -62,7 +62,7 @@ struct FloatingButtonView: View {
                                 
                             }
                         label: {
-                            Label("내역 추가", systemImage: "note.text.badge.plus")
+                            Label(NSLocalizedString("내역 추가", comment:""), systemImage: "note.text.badge.plus")
                         }
                         .sheet(isPresented: $addExpense) {
                             AddExpenseView()

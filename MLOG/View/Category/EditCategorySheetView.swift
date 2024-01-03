@@ -26,7 +26,7 @@ struct EditCategorySheetView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("카테고리명") {
+                Section(NSLocalizedString("카테고리명", comment:"")) {
                     TextField(categoryName, text: $inputCategoryName)
                         .onAppear {
                             if let category = category {
@@ -35,11 +35,11 @@ struct EditCategorySheetView: View {
                         }
                 }
             }
-            .navigationTitle("카테고리 수정")
+            .navigationTitle(NSLocalizedString("카테고리 수정", comment:""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("취소") {
+                    Button(NSLocalizedString("취소", comment:"")) {
                         addCategory = false
                         categoryName = ""
                         dismiss()
@@ -48,7 +48,7 @@ struct EditCategorySheetView: View {
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("저장") {
+                    Button(NSLocalizedString("저장", comment:"")) {
                         if let existingCategory = category {
                             existingCategory.categoryName = inputCategoryName
                         }

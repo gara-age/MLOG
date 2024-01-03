@@ -37,7 +37,8 @@ struct ExpensesView: View {
     @State private var endDate: Date = .now.endOfMonth
     @State private var latestFirst : Bool = true
     @State private var oldestFirst : Bool = false
-    @State private var customDate : String = "직접 설정"
+    @State private var customDate : String = NSLocalizedString("직접 설정", comment:"")
+
     @State private var showFilterView : Bool = false
     @State private var filteredExpenses: [GroupedExpenses] = []
     @State private var isSearching = false
@@ -110,13 +111,16 @@ struct ExpensesView: View {
             NavigationStack {
                 menuView()
                 expensesListView()
-                    .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Text("검색"))
-                    .navigationTitle("지출 내역")
+                    .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Text(NSLocalizedString("검색", comment:"")
+))
+                    .navigationTitle(NSLocalizedString("지출 내역", comment:"")
+)
                     .navigationBarTitleDisplayMode(.inline)
                     .overlay{
                         if allExpenses.isEmpty || groupedExpenses.isEmpty {
                             ContentUnavailableView{
-                                Label("내역이 없습니다", systemImage: "tray.fill")
+                                Label(NSLocalizedString("내역이 없습니다", comment:"")
+, systemImage: "tray.fill")
                             }
                         }
                     }
@@ -323,10 +327,12 @@ struct ExpensesView: View {
                     }
                 }
             }
-            .environment(\.locale, Locale(identifier: "ko_KR"))
+            .environment(\.locale, Locale(identifier: NSLocalizedString("ko_KR", comment:"")
+))
         }
         
-        .alert("내역 삭제시 복구가 어렵습니다. 정말 삭제하시겠습니까?", isPresented: $deleteRequest) {
+        .alert(NSLocalizedString("내역 삭제시 복구가 어렵습니다. 정말 삭제하시겠습니까?", comment:"")
+, isPresented: $deleteRequest) {
             Button(role: .destructive) {
                 if let expenseToDelete = selectedExpenseForDeletion {
                     context.delete(expenseToDelete)
@@ -341,13 +347,14 @@ struct ExpensesView: View {
                     }
                 }
             } label: {
-                Text("삭제")
+                Text(NSLocalizedString("삭제", comment:"")
+)
             }
             
             Button(role: .cancel) {
                 selectedExpenseForDeletion = nil
             } label: {
-                Text("취소")
+                Text(NSLocalizedString("취소", comment:""))
             }
         }
         
@@ -366,15 +373,15 @@ struct ExpensesView: View {
         HStack(spacing:25){
             //날짜 버튼
             Menu{
-                Button("1개월"){
+                Button(NSLocalizedString("1개월", comment:"")){
                     selectedDateFilter = .oneMonth
                     filterExpenses(searchText)
                 }
-                Button("3개월"){
+                Button(NSLocalizedString("3개월", comment:"")){
                     selectedDateFilter = .threeMonths
                     filterExpenses(searchText)
                 }
-                Button("지난달"){
+                Button(NSLocalizedString("지난달", comment:"")){
                     selectedDateFilter = .lastMonth
                     filterExpenses(searchText)
                 }
@@ -382,7 +389,7 @@ struct ExpensesView: View {
                     showFilterView.toggle()
                     
                 }
-                Button("전체 내역"){
+                Button(NSLocalizedString("전체 내역", comment:"")){
                     selectedDateFilter = .all
                     filterExpenses(searchText)
                 }
@@ -396,12 +403,14 @@ struct ExpensesView: View {
             
             Menu{
                 //시간순 정렬 버튼
-                Button("최신순"){
+                Button(NSLocalizedString("최신순", comment:"")
+){
                     selectedSortOrder = .latestFirst
                     filterExpenses(searchText)
                     latestFirst = true
                 }
-                Button("과거순"){
+                Button(NSLocalizedString("과거순", comment:"")
+){
                     selectedSortOrder = .oldestFirst
                     filterExpenses(searchText)
                     latestFirst = false
@@ -415,15 +424,18 @@ struct ExpensesView: View {
             
             Menu{
                 //수입지출 선택 버튼
-                Button("전체"){
+                Button(NSLocalizedString("전체", comment:"")
+){
                     selectedTransactionType = .all
                     filterExpenses(searchText)
                 }
-                Button("수입만"){
+                Button(NSLocalizedString("수입만", comment:"")
+){
                     selectedTransactionType = .incomeOnly
                     filterExpenses(searchText)
                 }
-                Button("지출만"){selectedTransactionType = .expenseOnly
+                Button(NSLocalizedString("지출만", comment:"")
+){selectedTransactionType = .expenseOnly
                     filterExpenses(searchText)
                 }
             } label: {
@@ -432,7 +444,8 @@ struct ExpensesView: View {
             
             Divider().frame(height: 10)
             
-            Button("초기화"){
+            Button(NSLocalizedString("초기화", comment:"")
+){
                 resetFiler()
             }
             .tint(.red)

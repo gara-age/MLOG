@@ -14,7 +14,7 @@ struct AddExpenseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     //로케일 설정 필요
-    @AppStorage("selectedCurrency") private var selectedCurrency: String = "$"
+    @AppStorage("selectedCurrency") private var selectedCurrency: String = NSLocalizedString("원", comment:"")
     
     
     @State private var title: String = ""
@@ -42,7 +42,7 @@ struct AddExpenseView: View {
             List {
                 if !allCategories.isEmpty{
                     HStack{
-                        Text("카테고리")
+                        Text(NSLocalizedString(NSLocalizedString("카테고리", comment:""), comment:""))
                         
                         Spacer()
                         
@@ -52,21 +52,21 @@ struct AddExpenseView: View {
                                     self.category = category
                                 }
                             }
-                            Button("None") {
+                            Button(NSLocalizedString("미지정", comment:"")) {
                                 category = nil
                             }
                         } label: {
                             if let categoryName = category?.categoryName{
                                 Text(categoryName)
                             } else {
-                                Text("미지정")
+                                Text(NSLocalizedString("미지정", comment:""))
                             }
                         }
                         
                     }
                 }
-                Section("제목") {
-                    TextField("지출 또는 수입 내용을 입력하세요.", text: $title)
+                Section(NSLocalizedString("제목", comment:"")) {
+                    TextField(NSLocalizedString("지출 또는 수입 내용을 입력하세요.", comment:""), text: $title)
                         .fixedSize(horizontal: false, vertical: true)
                         .focused($isInputActive)
                     
@@ -76,7 +76,7 @@ struct AddExpenseView: View {
                     SelectButton(
                         isSelected: $isSelectedIncome,
                         color: .income,
-                        text: "수입")
+                        text: NSLocalizedString("수입", comment:""))
                     .onTapGesture {
                         isSelectedIncome = true
                         if isSelectedIncome {
@@ -86,7 +86,7 @@ struct AddExpenseView: View {
                     SelectButton(
                         isSelected: $isSelectedExpense,
                         color: .expense,
-                        text: "지출")
+                        text: NSLocalizedString("지출", comment:""))
                     .onTapGesture {
                         isSelectedExpense = true
                         if isSelectedExpense {
@@ -95,7 +95,7 @@ struct AddExpenseView: View {
                     }
                 }
                 
-                Section("금액") {
+                Section(NSLocalizedString("금액", comment:"")) {
                     HStack{
                         HStack{
                             if selectedCurrency == "원" {
@@ -145,7 +145,7 @@ struct AddExpenseView: View {
                                         ToolbarItemGroup(placement: .keyboard) {
                                             Spacer()
                                             
-                                            Button("Done") {
+                                            Button(NSLocalizedString("완료", comment:"")) {
                                                 isInputActive = false
                                             }
                                         }
@@ -158,7 +158,7 @@ struct AddExpenseView: View {
                                         ToolbarItemGroup(placement: .keyboard) {
                                             Spacer()
                                             
-                                            Button("Done") {
+                                            Button(NSLocalizedString("완료", comment:"")) {
                                                 isInputActive = false
                                             }
                                         }
@@ -206,27 +206,27 @@ struct AddExpenseView: View {
                     }
                     
                 }
-                Section("날짜") {
+                Section(NSLocalizedString("날짜", comment:"")) {
                     DatePicker("", selection: $date, displayedComponents: [.date])
                         .datePickerStyle(.graphical)
                         .labelsHidden()
                 }
-                .environment(\.locale, Locale(identifier: "ko_KR"))
+                .environment(\.locale, Locale(identifier: NSLocalizedString("ko_KR", comment:"")))
                 
                 
             }
-            .navigationTitle("내역 추가")
+            .navigationTitle(NSLocalizedString("내역 추가", comment:""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("돌아가기"){
+                    Button(NSLocalizedString("돌아가기", comment:"")){
                         dismiss()
                     }
                     .tint(.cancel)
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("추가", action: addExpense)
+                    Button(NSLocalizedString("추가", comment:""), action: addExpense)
                         .disabled(isAddButtonDisabled)
                 }
             })

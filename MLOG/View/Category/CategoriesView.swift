@@ -39,7 +39,7 @@ struct CategoriesView: View {
     @State private var endDate: Date = .now.endOfMonth
     @State private var latestFirst : Bool = true
     @State private var oldestFirst : Bool = false
-    @State private var customDate : String = "직접 설정"
+    @State private var customDate : String = NSLocalizedString("직접 설정", comment:"")
     @State private var showFilterView : Bool = false
     @State private var filteredExpenses: [GroupedExpenses] = []
     @State private var isSearching = false
@@ -190,7 +190,7 @@ struct CategoriesView: View {
                 //                        }
                 //                    }
                 //                })
-                .navigationTitle("카테고리")
+                .navigationTitle(NSLocalizedString("카테고리", comment:""))
                 .navigationBarTitleDisplayMode(.inline)
                 
                 .overlay(content: {
@@ -277,7 +277,7 @@ struct CategorySectionView: View {
     @State private var endDate: Date = .now.endOfMonth
     @State private var latestFirst : Bool = true
     @State private var oldestFirst : Bool = false
-    @State private var customDate : String = "직접 설정"
+    @State private var customDate : String = NSLocalizedString("직접 설정", comment:"")
     @State private var showFilterView : Bool = false
     @State private var filteredExpenses: [GroupedExpenses] = []
     @State private var isSearching = false
@@ -512,8 +512,8 @@ struct CategorySectionView: View {
     
     var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "yy.MM.dd"
+        formatter.locale = Locale(identifier: NSLocalizedString("ko_KR", comment:""))
+        formatter.dateFormat = NSLocalizedString("yy.MM.dd", comment:"")
         return formatter
     }()
     
@@ -553,7 +553,7 @@ struct CategorySectionView: View {
                         
                         if index == sortedExpenses.indices.last {
                             HStack {
-                                Text("합계:")
+                                Text(NSLocalizedString("합계:", comment:""))
                                     .multilineTextAlignment(.leading)
                                 Spacer()
                                 Text(formatCurrency(amount: categoryTotalAmount(category: category)))
@@ -564,13 +564,15 @@ struct CategorySectionView: View {
                     if !addExpense && sortedExpenses.isEmpty {
                         HStack {
                             Spacer()
-                            Text("카테고리가 비어있습니다.")
+                            Text(NSLocalizedString("카테고리가 비어있습니다", comment:"")
+)
                             Spacer()
                         }
                     }
                 } else {
                     ContentUnavailableView {
-                        Label("목록이 비어있습니다", systemImage: "tray.fill")
+                        Label(NSLocalizedString("목록이 비어있습니다", comment:"")
+, systemImage: "tray.fill")
                     }
                 }
             } label: {
@@ -607,7 +609,8 @@ struct CategorySectionView: View {
             EditCategorySheetView(category: category, categoryName: $categoryName, addCategory: $addCategory)
                 .interactiveDismissDisabled()
         }
-        .alert("내역 삭제시 복구가 어렵습니다. 정말 삭제하시겠습니까?", isPresented: $expenseDeleteRequest) {
+        .alert(NSLocalizedString("내역 삭제시 복구가 어렵습니다. 정말 삭제하시겠습니까?", comment:"")
+, isPresented: $expenseDeleteRequest) {
             Button(role: .destructive) {
                 if let expenseToDelete = expenseToDelete {
                     // 내역 삭제 버튼을 눌렀을 때의 동작
@@ -622,16 +625,16 @@ struct CategorySectionView: View {
                     }
                 }
             } label: {
-                Text("삭제")
+                Text(NSLocalizedString("삭제", comment:""))
             }
             
             Button(role: .cancel) {
                 expenseToDelete = nil
             } label: {
-                Text("취소")
+                Text(NSLocalizedString("취소", comment:""))
             }
         }
-        .alert("카테고리 삭제시 카테고리에 지정된 내역들도 삭제됩니다. 정말 삭제하시겠습니까?", isPresented: $deleteRequest) {
+        .alert(NSLocalizedString("카테고리 삭제시 카테고리에 지정된 내역들도 삭제됩니다. 정말 삭제하시겠습니까?", comment:""), isPresented: $deleteRequest) {
             Button(role: .destructive) {
                 if let requestedCategory = requestedCategory {
                     let expensesToDelete = allExpenses.filter { $0.category == requestedCategory }
@@ -640,13 +643,13 @@ struct CategorySectionView: View {
                     self.requestedCategory = nil
                 }
             } label: {
-                Text("삭제")
+                Text(NSLocalizedString("삭제", comment:""))
             }
             
             Button(role: .cancel) {
                 requestedCategory = nil
             } label: {
-                Text("취소")
+                Text(NSLocalizedString("취소", comment:""))
             }
         }
         

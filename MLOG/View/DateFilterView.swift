@@ -16,23 +16,23 @@ struct DateFilterView: View {
     
     var body: some View {
         VStack(spacing: 15){
-            DatePicker("Start Date", selection: $start, displayedComponents: [.date])
-                .environment(\.locale, Locale(identifier: "ko-KR"))
+            DatePicker(NSLocalizedString("시작 날짜", comment:""), selection: $start, displayedComponents: [.date])
+                .environment(\.locale, Locale(identifier: NSLocalizedString("ko_KR", comment:"")))
 
             
-            DatePicker("End Date", selection: $end, displayedComponents: [.date])
-                .environment(\.locale, Locale(identifier: "ko-KR"))
+            DatePicker(NSLocalizedString("종료 날짜", comment:""), selection: $end, displayedComponents: [.date])
+                .environment(\.locale, Locale(identifier: NSLocalizedString("ko_KR", comment:"")))
 
             
             HStack(spacing: 15){
-                Button("Cancel") {
+                Button(NSLocalizedString("취소", comment:"")) {
                     onClose()
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.roundedRectangle(radius: 5))
                 .tint(.red)
                 
-                Button("Filter") {
+                Button(NSLocalizedString("적용", comment:"")) {
                     onSubmit(start, end)
                     
                 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3705E9A72B3315A200B34069 /* SelectFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3705E9A62B3315A200B34069 /* SelectFilterView.swift */; };
 		3717FC802B3AF80400437683 /* CurrencySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717FC7F2B3AF80400437683 /* CurrencySettingView.swift */; };
 		371B668B2AFB389E00741C91 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B668A2AFB389E00741C91 /* AddExpenseView.swift */; };
 		371B668D2AFB50C700741C91 /* ExpenseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B668C2AFB50C700741C91 /* ExpenseCardView.swift */; };
@@ -32,12 +31,12 @@
 		378F17662AFAB9D70033112C /* GroupedExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F17652AFAB9D70033112C /* GroupedExpenses.swift */; };
 		37AF57002B11B9D400E2A4AD /* Anim1.json in Resources */ = {isa = PBXBuildFile; fileRef = 37AF56FF2B11B9D400E2A4AD /* Anim1.json */; };
 		37AF57022B11BA1B00E2A4AD /* LottieAnimationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF57012B11BA1B00E2A4AD /* LottieAnimationVIew.swift */; };
+		37EE84942B45901500312A79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37EE84962B45901500312A79 /* Localizable.strings */; };
 		7EE978857D693BB9159E0460 /* Pods_MLOG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06523A5246B14AD0A899DA4E /* Pods_MLOG.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06523A5246B14AD0A899DA4E /* Pods_MLOG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLOG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3705E9A62B3315A200B34069 /* SelectFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFilterView.swift; sourceTree = "<group>"; };
 		3717FC7F2B3AF80400437683 /* CurrencySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySettingView.swift; sourceTree = "<group>"; };
 		371B668A2AFB389E00741C91 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		371B668C2AFB50C700741C91 /* ExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCardView.swift; sourceTree = "<group>"; };
@@ -64,6 +63,9 @@
 		378F17652AFAB9D70033112C /* GroupedExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedExpenses.swift; sourceTree = "<group>"; };
 		37AF56FF2B11B9D400E2A4AD /* Anim1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Anim1.json; sourceTree = "<group>"; };
 		37AF57012B11BA1B00E2A4AD /* LottieAnimationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationVIew.swift; sourceTree = "<group>"; };
+		37EE84952B45901500312A79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37EE84982B45901800312A79 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37EE84992B4590A600312A79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C5E4B87A2489398E77E22BF /* Pods-MLOG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLOG.debug.xcconfig"; path = "Target Support Files/Pods-MLOG/Pods-MLOG.debug.xcconfig"; sourceTree = "<group>"; };
 		4F5A0C49B94245CF4D309C2E /* Pods-MLOG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLOG.release.xcconfig"; path = "Target Support Files/Pods-MLOG/Pods-MLOG.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +124,6 @@
 				376331A62B2C5C9E0043CA14 /* EditExpenseView.swift */,
 				371B668A2AFB389E00741C91 /* AddExpenseView.swift */,
 				371B668C2AFB50C700741C91 /* ExpenseCardView.swift */,
-				3705E9A62B3315A200B34069 /* SelectFilterView.swift */,
 			);
 			path = Expense;
 			sourceTree = "<group>";
@@ -158,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				375DC8532B43D458007C56CB /* Info.plist */,
+				37EE84962B45901500312A79 /* Localizable.strings */,
 				375DC84F2B43D414007C56CB /* Source */,
 				378F175C2AFAAC400033112C /* Model */,
 				378F175B2AFAAC350033112C /* View */,
@@ -257,6 +259,8 @@
 				en,
 				Base,
 				ko,
+				"zh-Hans",
+				ja,
 			);
 			mainGroup = 378F173F2AFAA9DB0033112C;
 			productRefGroup = 378F17492AFAA9DB0033112C /* Products */;
@@ -273,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37EE84942B45901500312A79 /* Localizable.strings in Resources */,
 				378F17552AFAA9DC0033112C /* Preview Assets.xcassets in Resources */,
 				37AF57002B11B9D400E2A4AD /* Anim1.json in Resources */,
 				375DC8522B43D43D007C56CB /* NotoSansArabic-Medium.ttf in Resources */,
@@ -333,7 +338,6 @@
 				371B668B2AFB389E00741C91 /* AddExpenseView.swift in Sources */,
 				378F17642AFAB2060033112C /* CategoriesView.swift in Sources */,
 				378F17622AFAB1E20033112C /* ExpensesView.swift in Sources */,
-				3705E9A72B3315A200B34069 /* SelectFilterView.swift in Sources */,
 				376331BC2B31EE5F0043CA14 /* DateExtensions.swift in Sources */,
 				378F17602AFAAE4F0033112C /* Category.swift in Sources */,
 				376331A72B2C5C9E0043CA14 /* EditExpenseView.swift in Sources */,
@@ -354,6 +358,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		37EE84962B45901500312A79 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37EE84952B45901500312A79 /* zh-Hans */,
+				37EE84982B45901800312A79 /* ja */,
+				37EE84992B4590A600312A79 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		378F17562AFAA9DC0033112C /* Debug */ = {

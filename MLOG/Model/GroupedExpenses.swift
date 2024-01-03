@@ -17,13 +17,17 @@ struct GroupedExpenses: Identifiable {
         let calendar = Calendar.current
         
         if calendar.isDateInToday(date){
-            return "오늘"
+            return NSLocalizedString("오늘", comment:"")
+
         } else if calendar.isDateInYesterday(date){
-            return "어제"
+            return NSLocalizedString("", comment:"")
+
         } else {
             let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            dateFormatter.dateFormat = "yyyy년 MM월 dd일 "
+            dateFormatter.locale = Locale(identifier: NSLocalizedString("ko_KR", comment:"")
+)
+            dateFormatter.dateFormat = NSLocalizedString("yyyy년 MM월 dd일", comment:"")
+
             
             return dateFormatter.string(from: date)        }
         

@@ -16,7 +16,8 @@ struct ExpenseCardView: View {
     @State private var color: Color = .green
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
     //로케일 설정 필요
-    @State private var emptyCurrency : String = "$"
+    @State private var emptyCurrency : String = NSLocalizedString("원", comment:"")
+
     
     
     var body: some View {

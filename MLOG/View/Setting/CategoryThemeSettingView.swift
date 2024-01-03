@@ -35,12 +35,12 @@ struct CategoryThemeSettingView: View {
                                 .lineLimit(1)
                                 
                             }
-                            Button("미선택") {
+                            Button(NSLocalizedString("미지정", comment:"")) {
                                 category = nil
                                 settingsViewModel.setCategoryColor(nil, color: selectedCategoryColor)
                             }
                         } label: {
-                            Text(settingsViewModel.newlyAddedCategoryName.isEmpty ? category?.categoryName ?? "카테고리 선택" : settingsViewModel.newlyAddedCategoryName)
+                            Text(settingsViewModel.newlyAddedCategoryName.isEmpty ? category?.categoryName ?? NSLocalizedString("카테고리 선택", comment:"") : settingsViewModel.newlyAddedCategoryName)
                         }
                         
                         ColorPicker("", selection: $selectedCategoryColor)
@@ -56,11 +56,11 @@ struct CategoryThemeSettingView: View {
                 }
             }
            
-            .navigationTitle("카테고리 테마 설정")
+            .navigationTitle(NSLocalizedString("카테고리 테마 설정", comment:""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("저장") {
+                    Button(NSLocalizedString("저장", comment:"")) {
                         settingsViewModel.newlyAddedCategoryName = ""
                         dismiss()
                     }
