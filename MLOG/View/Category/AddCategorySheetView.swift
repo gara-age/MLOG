@@ -32,6 +32,7 @@ struct AddCategorySheetView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("취소") {
                         addCategory = false
+                        categoryName = ""
                     }
                     .tint(.cancel)
                 }

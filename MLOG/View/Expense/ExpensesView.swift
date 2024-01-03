@@ -251,6 +251,7 @@ struct ExpensesView: View {
         }
         .sheet(isPresented: $showCategoryThemeSettingView) {
             CategoryThemeSettingView()
+                .interactiveDismissDisabled()
         }
         .sheet(item: $selectedExpense) { expense in
             EditExpenseView(expense: expense)
@@ -266,6 +267,7 @@ struct ExpensesView: View {
                 addCategory: $addCategory,
                 showCategoryThemeSettingView: $showCategoryThemeSettingView
             )
+            .interactiveDismissDisabled()
         }
         
         .sheet(isPresented: $setCurrency) {

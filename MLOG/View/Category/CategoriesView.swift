@@ -237,6 +237,7 @@ struct CategoriesView: View {
                 addCategory: $addCategory,
                 showCategoryThemeSettingView: $showCategoryThemeSettingView
             )
+            .interactiveDismissDisabled()
         }
         
     }

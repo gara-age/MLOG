@@ -13,7 +13,8 @@ import SwiftData
 struct EditExpenseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
-    @AppStorage("selectedCurrency") private var selectedCurrency: String = "원"
+    //로케일 설정 필요
+    @AppStorage("selectedCurrency") private var selectedCurrency: String = "$"
     
     
     @State private var title: String = ""

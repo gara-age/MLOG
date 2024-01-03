@@ -10,11 +10,12 @@ import SwiftUI
 struct CurrencySettingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText: String = ""
-    @AppStorage("selectedCurrency") private var selectedCurrency: String = "$"
+    @AppStorage("selectedCurrency") private var selectedCurrency: String = ""
     //로컬라이즈 시에 .onapear로 기본 통화 처리필요 (한,일,중,미 외에는 달러로 처리 되도록)
     @AppStorage("selectedCurrencyID") private var selectedCurrencyID: String = "$🇺🇸USD   미국   -   달러"
     @State private var selectedCurrencyName: String = ""
-    
+    @AppStorage("currencySelect") private var currencySelect : Bool?
+
     struct Currency: Identifiable {
         var id: String { symbol + name }
         let symbol: String
@@ -182,6 +183,7 @@ struct CurrencySettingView: View {
             List {
                 ForEach(currencies.filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }) { currency in
                     Button {
+                        currencySelect = true
                         selectedCurrencyID = currency.id
                         selectedCurrency = currency.symbol
                         selectedCurrencyName = String(currency.name.prefix(4))
@@ -212,15 +214,20 @@ struct CurrencySettingView: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("검색"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("현재 통화: \(selectedCurrencyName)")
+            //앱 첫 실행시 툴바 숨겨야함
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("취소") {
-                        dismiss()
+//                첫 실행시에 팝업으로 통화설정 보여주기/ 이후에는 돌아가기 버튼 계속 활성화됨
+                if let currencySelect = currencySelect, currencySelect {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("돌아가기") {
+                            dismiss()
+                        }
+                        .tint(.cancel)
                     }
-                    .tint(.cancel)
-                    
                 }
+                
             }
+            
         }
     }
     private func updateCurrencyFormats(for currencySymbol: String) {

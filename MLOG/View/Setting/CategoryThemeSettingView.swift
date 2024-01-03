@@ -15,6 +15,7 @@ struct CategoryThemeSettingView: View {
     @State private var selectedCategoryColor: Color = .green
     @State private var category: Category?
     @State private var categories: [Category] = []
+    @State private var showCategoryThemeSettingView = false
 
 
  
@@ -54,6 +55,7 @@ struct CategoryThemeSettingView: View {
                     }
                 }
             }
+           
             .navigationTitle("카테고리 테마 설정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

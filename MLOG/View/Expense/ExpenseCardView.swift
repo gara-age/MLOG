@@ -15,6 +15,8 @@ struct ExpenseCardView: View {
     var displayTag: Bool = true
     @State private var color: Color = .green
     @EnvironmentObject private var settingsViewModel: SettingsViewModel
+    //로케일 설정 필요
+    @State private var emptyCurrency : String = "$"
     
     
     var body: some View {
@@ -57,9 +59,30 @@ struct ExpenseCardView: View {
     func formatCurrency(amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        
+        //첫 실행시를 위해 기본 통화 처리 로컬라이징 처리하여서 국가별 다르게하면 될듯
+        guard let selectedCurrency = selectedCurrency, !selectedCurrency.isEmpty else {
+            // If selectedCurrency is empty, provide a default currency
+            let formattedAmount = formatter.string(for: amount) ?? ""
+            
+            if amount >= 0 {
+                if emptyCurrency == "원"{
+                    return "\(formattedAmount) \(emptyCurrency)"
+                }
+                else{
+                    return "\(emptyCurrency) \(formattedAmount)"
+                }
+            } else {
+                if emptyCurrency == "원"{
+                    return "\(formattedAmount) \(emptyCurrency)"
+                }
+                return "- \(emptyCurrency) \(expense.amount*(-1))"
+            }
+        }
+
+            
         formatter.currencySymbol = selectedCurrency
         
-        if let selectedCurrency = selectedCurrency {
             // UserDefaults에서 저장된 NumberFormatter 불러오기
             if let data = UserDefaults.standard.value(forKey: "currencyFormatter") as? Data,
                let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
@@ -88,7 +111,7 @@ struct ExpenseCardView: View {
                     return formattedString
                 }
             }
-        }
+        
         // 기본값
         return "\(amount) \(selectedCurrency ?? "")"
     }
