@@ -46,10 +46,19 @@ struct ContentView: View {
             }
             
             if !isContentReady {
-                LottieAnimationVIew().transition(.opacity)
+                LottieAnimationVIew()
+                    .transition(.opacity)
                     .background(Color.animBG)
                     .edgesIgnoringSafeArea(.all)
+                    .onDisappear {
+                        // LottieAnimationVIew가 사라질 때, 처음 실행 여부를 확인하고 CurrencySettingView를 표시
+                        if !UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce") {
+                            UserDefaults.standard.set(true, forKey: "isAppAlreadyLaunchedOnce")
+                            setting = true
+                        }
+                    }
             }
+
             if isFloatingButtonClicked {
                 
                 Color.black
@@ -61,7 +70,13 @@ struct ContentView: View {
             }
             
         }
-        
+        //앱을 처음 실행할때만 통화설정 창 열림
+        .sheet(isPresented: $setting, onDismiss: {
+            // CurrencySettingView가 닫힐 때 실행되는 코드
+            print("CurrencySettingView dismissed")
+        }) {
+            CurrencySettingView()
+        }
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
                 withAnimation{isContentReady = true}
@@ -69,6 +84,7 @@ struct ContentView: View {
         }
         
     }
+    
     @ViewBuilder func admob() -> some View {
         // admob
         GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
