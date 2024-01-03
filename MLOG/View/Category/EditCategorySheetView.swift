@@ -35,7 +35,7 @@ struct EditCategorySheetView: View {
                         }
                 }
             }
-            .navigationTitle("카테고리 이름 수정")
+            .navigationTitle("카테고리 수정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

@@ -15,7 +15,7 @@ struct AddCategorySheetView: View {
     @State private var addedCategory: Category?
     @State private var addedCategories: [Category] = []
     @State private var previousCategoryColor: Color = .green
-    @Binding var showCategoryThemeSettingView: Bool 
+    @Binding var showCategoryThemeSettingView: Bool
     
     
     
@@ -43,11 +43,13 @@ struct AddCategorySheetView: View {
                         context.insert(category)
                         
                         addedCategory = category
+                        SettingsViewModel.shared.setNewlyAddedCategoryName(category.categoryName)
+
                         categoryName = ""
                         addCategory = false
-                        
+
                         showCategoryThemeSettingView = true
-                        
+
                     }
                     .disabled(categoryName.isEmpty)
                 }

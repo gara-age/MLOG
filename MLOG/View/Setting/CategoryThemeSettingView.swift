@@ -39,7 +39,7 @@ struct CategoryThemeSettingView: View {
                                 settingsViewModel.setCategoryColor(nil, color: selectedCategoryColor)
                             }
                         } label: {
-                            Text(category?.categoryName ?? "카테고리 선택")
+                            Text(settingsViewModel.newlyAddedCategoryName.isEmpty ? category?.categoryName ?? "카테고리 선택" : settingsViewModel.newlyAddedCategoryName)
                         }
                         
                         ColorPicker("", selection: $selectedCategoryColor)
@@ -59,6 +59,7 @@ struct CategoryThemeSettingView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("저장") {
+                        settingsViewModel.newlyAddedCategoryName = ""
                         dismiss()
                     }
                 }
@@ -73,7 +74,16 @@ struct CategoryThemeSettingView: View {
         .presentationDetents([.height(180)])
     }
 }
-
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(
+            red: CGFloat.random(in: 0...1),
+            green: CGFloat.random(in: 0...1),
+            blue: CGFloat.random(in: 0...1),
+            alpha: 1.0
+        )
+    }
+}
 class SettingsViewModel: ObservableObject {
     static let shared = SettingsViewModel()
     @Published var categoryNames: [String] = []
@@ -81,17 +91,20 @@ class SettingsViewModel: ObservableObject {
     @Published var showColorPicker: Bool = false
     @Published var categories: [Category] = []
     @Published var Changed = false
-
+    @Published var newlyAddedCategoryName: String = ""
     
+    private var defaultCategoryColor: Color {
+            let uiColor = UIColor.random()
+            return Color(uiColor)
+        }
+    func setNewlyAddedCategoryName(_ categoryName: String) {
+            newlyAddedCategoryName = categoryName
+        }
     
     @Published var color: Color = .green {
         didSet {
             UserDefaults.standard.setColor(color, forKey: "expenseCardColor")
         }
-    }
-    
-    init() {
-        self.color = UserDefaults.standard.color(forKey: "expenseCardColor") ?? .green
     }
     
     
@@ -103,15 +116,24 @@ class SettingsViewModel: ObservableObject {
             }
             setColor(color)
             updateChanged()
+
         }
 
-        func getCategoryColor(_ category: Category?) -> Color {
-            if let categoryID = category?.id,
-               let storedColor = UserDefaults.standard.color(forKey: "\(categoryColorKey)_\(categoryID)") {
+    func getCategoryColor(_ category: Category?) -> Color {
+        if let categoryID = category?.id {
+            if let storedColor = UserDefaults.standard.color(forKey: "\(categoryColorKey)_\(categoryID)") {
                 return storedColor
+            } else {
+                // Generate and store a random color if not set yet
+                let randomColor = defaultCategoryColor
+                UserDefaults.standard.setColor(randomColor, forKey: "\(categoryColorKey)_\(categoryID)")
+                return randomColor
             }
-            return color
+        } else {
+            return defaultCategoryColor
         }
+    }
+
     
     func setColor(_ newColor: Color) {
         color = newColor
