@@ -28,7 +28,6 @@ struct ExpenseCardView: View {
             Spacer(minLength: 5)
             
             Text(formatCurrency(amount: expense.amount))
-//                .font(.custom("NotoSansArabic-Medium", size: 17))
         }
         .onAppear {
             color = settingsViewModel.color
@@ -54,7 +53,7 @@ struct ExpenseCardView: View {
             
         }
     }
-    //로케일 설정 필요
+    //로컬라이즈 시에 .onapear로 기본 통화 처리필요 (한,일,중,미 외에는 달러로 처리 되도록)
     func formatCurrency(amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -73,8 +72,8 @@ struct ExpenseCardView: View {
                     // 특정 통화일 경우
                     formatter.currencySymbol = ""
                     Text("\(formatter.currencySymbol)")
-
-
+                    
+                    
                     
                 }
                 else {

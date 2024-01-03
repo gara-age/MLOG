@@ -14,7 +14,7 @@ struct AddExpenseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     @AppStorage("selectedCurrency") private var selectedCurrency: String = "원"
-
+    
     
     @State private var title: String = ""
     @State private var subTitle: String = ""
@@ -239,7 +239,7 @@ struct AddExpenseView: View {
     func addExpense() {
         amount = CGFloat(Double(amountString.replacingOccurrences(of: ",", with: "")) ?? 0)
         
-        let amountMultiplier: Double = isSelectedIncome ? 1.0 : -1.0 // 양수라면 무관하지만 음수값이 나올 경우 선택된 통화가 한국원 외의 통화라면 -통화 금액 순으로 정렬되도록 필요
+        let amountMultiplier: Double = isSelectedIncome ? 1.0 : -1.0 
         let expenses = Expense(title: title,amount: amount * amountMultiplier, date: date, category: category)
         do {
             try context.insert(expenses)

@@ -20,7 +20,6 @@ struct ExpensesView: View {
     @State  var originalGroupedExpenses: [GroupedExpenses] = []
     @State var addExpense: Bool = false
     @State  var addCategory: Bool = false
-//    @State  var setColor: Bool = false
     @State private var isEditingExpense = false
     @State  var searchText: String = ""
     
@@ -29,7 +28,7 @@ struct ExpensesView: View {
     @State private var selectedExpense: Expense?
     @State private var setCurrency: Bool = false
     @State private var deleteRequest: Bool = false
-     
+    
     //검색기능
     @State private var selectedDateFilter: DateFilter = .all
     @State private var selectedSortOrder: SortOrder = .latestFirst
@@ -41,12 +40,12 @@ struct ExpensesView: View {
     @State private var customDate : String = "직접 설정"
     @State private var showFilterView : Bool = false
     @State private var filteredExpenses: [GroupedExpenses] = []
-        @State private var isSearching = false
+    @State private var isSearching = false
     @State private var selectedExpenseForDeletion: Expense?
     @State private var showCategoryThemeSettingView = false
-
+    
     @Binding var isFloatingButtonClicked: Bool
-
+    
     enum DateFilter: String, CaseIterable {
         
         case all = "전체 내역"
@@ -56,35 +55,35 @@ struct ExpensesView: View {
         case custom = "직접 설정"
         
         var startDate: Date {
-                switch self {
-                case .custom:
-                    return .now.startOfMonth
-                default:
-                    return .now
-                }
+            switch self {
+            case .custom:
+                return .now.startOfMonth
+            default:
+                return .now
             }
-            
-            var endDate: Date {
-                switch self {
-                case .custom:
-                    return .now.endOfMonth
-                default:
-                    return .now
-                }
+        }
+        
+        var endDate: Date {
+            switch self {
+            case .custom:
+                return .now.endOfMonth
+            default:
+                return .now
             }
-           
-           var displayString: String {
-               switch self {
-               default:
-                   return rawValue
-               }
-           }
+        }
+        
+        var displayString: String {
+            switch self {
+            default:
+                return rawValue
+            }
+        }
         func format(date : Date, format : String) -> String {
             let formatter = DateFormatter()
             formatter.dateFormat = format
             return formatter.string(from: date)
             
-        
+            
             
         }
     }
@@ -94,7 +93,7 @@ struct ExpensesView: View {
         case oldestFirst = "과거순"
         
         static var defaultSortOrder: SortOrder = .latestFirst
-
+        
     }
     
     enum TransactionTypeFilter: String, CaseIterable {
@@ -121,68 +120,68 @@ struct ExpensesView: View {
                             }
                         }
                     }
-//                    .toolbar(content: {
-//                        ToolbarItem(placement: .topBarTrailing) {
-//                            Menu(content: {
-//                                Button {
-//                                    addExpense.toggle()
-//
-//                                }
-//                            label: {
-//                                Label("내역 추가", systemImage: "note.text.badge.plus")
-//                            }
-//                            .sheet(isPresented: $addExpense) {
-//                                AddExpenseView()
-//                                    .interactiveDismissDisabled()
-//                            }
-//                                
-//                                Button {
-//                                    addCategory.toggle()
-//                                     
-//
-//                                }
-//                            label: {
-//                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
-//                            }
-//                            .sheet(isPresented: $addCategory) {
-//                                AddCategorySheetView(
-//                                    categoryName: $categoryName,
-//                                    addCategory: $addCategory,
-//                                    showCategoryThemeSettingView: $showCategoryThemeSettingView
-//                                )
-//                            }
-//                             
-//                                
-//                                Button {
-//                                    showCategoryThemeSettingView.toggle()
-//                                     
-//                                }
-//                            label: {
-//                                Label("카테고리 테마 지정", systemImage: "paintpalette")
-//                            }
-//                            .sheet(isPresented: $showCategoryThemeSettingView) {
-//                                CategoryThemeSettingView()
-//                            }
-//                            
-//                                
-//                                Button {
-//                                    setCurrency.toggle()
-//                                     
-//                                }
-//                            label: {
-//                                Label("통화 설정", systemImage: "dollarsign")
-//                            }
-//                            .sheet(isPresented: $setCurrency) {
-//                                CurrencySettingView()
-//                                    .interactiveDismissDisabled()
-//                            }
-//                            }) {
-//                                Image(systemName: "plus")
-//                                    
-//                                
-//                            }
-//                        }
-//                    })
+                //                    .toolbar(content: {
+                //                        ToolbarItem(placement: .topBarTrailing) {
+                //                            Menu(content: {
+                //                                Button {
+                //                                    addExpense.toggle()
+                //
+                //                                }
+                //                            label: {
+                //                                Label("내역 추가", systemImage: "note.text.badge.plus")
+                //                            }
+                //                            .sheet(isPresented: $addExpense) {
+                //                                AddExpenseView()
+                //                                    .interactiveDismissDisabled()
+                //                            }
+                //
+                //                                Button {
+                //                                    addCategory.toggle()
+                //
+                //
+                //                                }
+                //                            label: {
+                //                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
+                //                            }
+                //                            .sheet(isPresented: $addCategory) {
+                //                                AddCategorySheetView(
+                //                                    categoryName: $categoryName,
+                //                                    addCategory: $addCategory,
+                //                                    showCategoryThemeSettingView: $showCategoryThemeSettingView
+                //                                )
+                //                            }
+                //
+                //
+                //                                Button {
+                //                                    showCategoryThemeSettingView.toggle()
+                //
+                //                                }
+                //                            label: {
+                //                                Label("카테고리 테마 지정", systemImage: "paintpalette")
+                //                            }
+                //                            .sheet(isPresented: $showCategoryThemeSettingView) {
+                //                                CategoryThemeSettingView()
+                //                            }
+                //
+                //
+                //                                Button {
+                //                                    setCurrency.toggle()
+                //
+                //                                }
+                //                            label: {
+                //                                Label("통화 설정", systemImage: "dollarsign")
+                //                            }
+                //                            .sheet(isPresented: $setCurrency) {
+                //                                CurrencySettingView()
+                //                                    .interactiveDismissDisabled()
+                //                            }
+                //                            }) {
+                //                                Image(systemName: "plus")
+                //
+                //
+                //                            }
+                //                        }
+                //                    })
                     .blur(radius: showFilterView ? 8 : 0)
                     .disabled(showFilterView)
                     .overlay{
@@ -192,9 +191,9 @@ struct ExpensesView: View {
                                     startDate = start
                                     endDate = end
                                     filterExpenses(searchText)
-                                        showFilterView = false
-                                        selectedDateFilter = .custom
-
+                                    showFilterView = false
+                                    selectedDateFilter = .custom
+                                    
                                     
                                 }, onClose: {
                                     showFilterView = false
@@ -204,12 +203,12 @@ struct ExpensesView: View {
                         }
                         .animation(.snappy, value: showFilterView)
                     }
-                   
+                
                 
                 
             }
             FloatingButtonView(addExpense: $addExpense, addCategory: $addCategory, showCategoryThemeSettingView : $showCategoryThemeSettingView, setCurrency: $setCurrency, isFloatingButtonClicked: $isFloatingButtonClicked)
-
+            
         }
         
         .onAppear {
@@ -218,7 +217,7 @@ struct ExpensesView: View {
         .onChange(of: settingsViewModel.Changed) { newValue in
             settingsViewModel.Changed = newValue
             createGroupedExpenses(allExpenses)
-
+            
         }
         .onChange(of: allExpenses, perform: { newValue in
             if newValue.count > allExpenses.count || groupedExpenses.isEmpty || currentTab == "Categories" {
@@ -234,18 +233,18 @@ struct ExpensesView: View {
             settingsViewModel.Changed.toggle()
             saveContext()
         }
-
+        
         .onChange(of: searchText) { newValue in
-
+            
             filterExpenses(newValue)
         }
         .onChange(of: isSearching) { newValue in
-                        if !newValue {
-                            // 취소 버튼이 눌렸을 때, 검색어를 초기화하고 원래 데이터로 복원
-                            searchText = ""
-                            groupedExpenses = originalGroupedExpenses
-                        }
-                    }
+            if !newValue {
+                // 취소 버튼이 눌렸을 때, 검색어를 초기화하고 원래 데이터로 복원
+                searchText = ""
+                groupedExpenses = originalGroupedExpenses
+            }
+        }
         .sheet(isPresented: $addExpense) {
             AddExpenseView()
                 .interactiveDismissDisabled()
@@ -281,13 +280,13 @@ struct ExpensesView: View {
             await updateExpenses(allExpenses, searchText: searchText.isEmpty ? "" : searchText)
         }
     }
-
+    
     func createGroupedExpenses(_ expenses: [Expense]) {
         Task {
             await updateExpenses(expenses, searchText: searchText)
         }
     }
-
+    
     private func expensesListView() -> some View {
         List {
             ForEach($groupedExpenses) { $group in
@@ -300,24 +299,22 @@ struct ExpensesView: View {
                             return expense1.date < expense2.date
                         }
                     })) { expense in
-
-                        ExpenseCardView(expense: expense)
                         
-//                            .font(.custom("NotoSansArabic-Medium", size: 17))
+                        ExpenseCardView(expense: expense)
                             .environmentObject(settingsViewModel)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                 Button {
                                     selectedExpenseForDeletion = expense
                                     deleteRequest.toggle()
                                 } label: {
-                                        Image(systemName: "trash")
-                                    }
-                                    .tint(.delete)
+                                    Image(systemName: "trash")
+                                }
+                                .tint(.delete)
                                 Button {
                                     editExpense(expense)
                                 } label: {
                                     Image(systemName: "pencil")
-
+                                    
                                 }
                                 .tint(.edit)
                             }
@@ -344,17 +341,17 @@ struct ExpensesView: View {
             } label: {
                 Text("삭제")
             }
-
+            
             Button(role: .cancel) {
                 selectedExpenseForDeletion = nil
             } label: {
                 Text("취소")
             }
         }
-
-
+        
+        
     }
-
+    
     private func resetFiler() {
         selectedDateFilter = .all
         selectedSortOrder = .latestFirst
@@ -369,15 +366,15 @@ struct ExpensesView: View {
             Menu{
                 Button("1개월"){
                     selectedDateFilter = .oneMonth
-                            filterExpenses(searchText)
+                    filterExpenses(searchText)
                 }
                 Button("3개월"){
                     selectedDateFilter = .threeMonths
-                           filterExpenses(searchText)
+                    filterExpenses(searchText)
                 }
                 Button("지난달"){
                     selectedDateFilter = .lastMonth
-                            filterExpenses(searchText)
+                    filterExpenses(searchText)
                 }
                 Button(customDate){
                     showFilterView.toggle()
@@ -385,9 +382,9 @@ struct ExpensesView: View {
                 }
                 Button("전체 내역"){
                     selectedDateFilter = .all
-                           filterExpenses(searchText)
+                    filterExpenses(searchText)
                 }
-
+                
                 
             } label: {
                 Text("\(selectedDateFilter.rawValue)")
@@ -399,30 +396,30 @@ struct ExpensesView: View {
                 //시간순 정렬 버튼
                 Button("최신순"){
                     selectedSortOrder = .latestFirst
-                            filterExpenses(searchText)
+                    filterExpenses(searchText)
                     latestFirst = true
                 }
                 Button("과거순"){
                     selectedSortOrder = .oldestFirst
-                            filterExpenses(searchText)
+                    filterExpenses(searchText)
                     latestFirst = false
-
+                    
                 }
             } label: {
                 Text("\(selectedSortOrder.rawValue)")
             }
             
             Divider().frame(height: 10)
-
+            
             Menu{
                 //수입지출 선택 버튼
                 Button("전체"){
                     selectedTransactionType = .all
-                                        filterExpenses(searchText)
+                    filterExpenses(searchText)
                 }
                 Button("수입만"){
                     selectedTransactionType = .incomeOnly
-                                        filterExpenses(searchText)
+                    filterExpenses(searchText)
                 }
                 Button("지출만"){selectedTransactionType = .expenseOnly
                     filterExpenses(searchText)
@@ -432,14 +429,14 @@ struct ExpensesView: View {
             }
             
             Divider().frame(height: 10)
-
+            
             Button("초기화"){
                 resetFiler()
             }
             .tint(.red)
-           
+            
         }
-
+        
     }
     
     func editExpense(_ expense: Expense) {
@@ -455,7 +452,7 @@ struct ExpensesView: View {
         }
     }
     func updateExpenses(_ expenses: [Expense], searchText: String) {
-
+        
         Task.detached(priority: .high) {
             var filteredExpenses: [Expense]
             let latestFirstValue = await latestFirst
@@ -490,12 +487,12 @@ struct ExpensesView: View {
                 // 전체 내역
                 filteredExpenses = expenses
             }
-
+            
             // 검색어에 따라 내역을 필터링
             if !searchText.isEmpty {
                 filteredExpenses = filteredExpenses.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
             }
-
+            
             // 선택된 정렬 순서에 따라 내역을 정렬
             let sortedExpenses: [Expense] = await {
                 switch await selectedSortOrder {
@@ -507,7 +504,7 @@ struct ExpensesView: View {
                     return filteredExpenses.sorted { $0.date < $1.date }
                 }
             }()
-
+            
             // 수입/지출에 따라 내역을 필터링
             switch await selectedTransactionType {
             case .incomeOnly:
@@ -520,26 +517,26 @@ struct ExpensesView: View {
                 // 전체 내역
                 filteredExpenses = sortedExpenses
             }
-
+            
             // 선택된 정렬 순서에 따라 내역을 정렬하고 그룹화
             let groupedDict = Dictionary(grouping: filteredExpenses) { expenses in
                 let dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: expenses.date)
                 return dateComponents
             }
-
+            
             // 날짜별로 정렬된 그룹을 날짜 기준으로 내림차순 정렬
             let sortedDict = groupedDict.sorted {
                 let calendar = Calendar.current
                 let date1 = calendar.date(from: $0.key) ?? .init()
                 let date2 = calendar.date(from: $1.key) ?? .init()
-
+                
                 if latestFirstValue {
                     return calendar.compare(date1, to: date2, toGranularity: .day) == .orderedDescending
                 } else {
                     return calendar.compare(date2, to: date1, toGranularity: .day) == .orderedDescending
                 }
             }
-
+            
             await MainActor.run {
                 // 화면에 표시할 그룹화된 내역을 업데이트
                 groupedExpenses = sortedDict.compactMap { dict in
@@ -550,7 +547,7 @@ struct ExpensesView: View {
             }
         }
     }
-
+    
 }
 
 

@@ -29,7 +29,6 @@ struct FloatingButtonView: View {
                                 isFloatingButtonClicked = false
                             }
                         label: {
-                            //systemImage를 달러, 엔, 원 으로 사용자 설정값에 맞게 바뀌도록하기
                             Label("통화 설정", systemImage: "dollarsign")
                         }
                         .sheet(isPresented: $setCurrency) {
@@ -50,7 +49,7 @@ struct FloatingButtonView: View {
                             Button {
                                 addCategory.toggle()
                                 isFloatingButtonClicked = false
-
+                                
                             }
                         label: {
                             Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
@@ -60,7 +59,7 @@ struct FloatingButtonView: View {
                             Button {
                                 addExpense.toggle()
                                 isFloatingButtonClicked = false
-
+                                
                             }
                         label: {
                             Label("내역 추가", systemImage: "note.text.badge.plus")
@@ -89,8 +88,8 @@ struct FloatingButtonView: View {
         }
         .onTapGesture {
             isFloatingButtonClicked = true
-
-               }
+            
+        }
     }
     
     

@@ -16,9 +16,9 @@ struct AddCategorySheetView: View {
     @State private var addedCategories: [Category] = []
     @State private var previousCategoryColor: Color = .green
     @Binding var showCategoryThemeSettingView: Bool 
-     
     
-
+    
+    
     var body: some View {
         NavigationStack {
             List {
@@ -35,19 +35,19 @@ struct AddCategorySheetView: View {
                     }
                     .tint(.cancel)
                 }
-
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("추가") {
                         
                         let category = Category(id: UUID(), categoryName: categoryName)
                         context.insert(category)
-
+                        
                         addedCategory = category
                         categoryName = ""
                         addCategory = false
                         
                         showCategoryThemeSettingView = true
-
+                        
                     }
                     .disabled(categoryName.isEmpty)
                 }

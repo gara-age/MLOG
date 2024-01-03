@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SelectFilterView: View {
     @Environment(\.dismiss) private var dismiss
-
+    
     @State private var selectOneMonth = false
     @State private var selectThreeMonth = false
     @State private var selectLastMonth = false
@@ -25,13 +25,13 @@ struct SelectFilterView: View {
     @State private var selectHighValue = false
     
     
-
-
-
+    
+    
+    
     
     var body: some View {
         DisclosureGroup{
-
+            
             VStack(spacing: 15){
                 Text("검색 기간 설정")
                 
@@ -230,7 +230,7 @@ struct SelectFilterView: View {
         } label: {
             Spacer()
             Text("검색 필터 설정")
-
+            
         }
     }
 }

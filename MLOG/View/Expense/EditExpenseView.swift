@@ -14,7 +14,7 @@ struct EditExpenseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     @AppStorage("selectedCurrency") private var selectedCurrency: String = "원"
-
+    
     
     @State private var title: String = ""
     @State private var subTitle: String = ""
@@ -249,11 +249,11 @@ struct EditExpenseView: View {
     func updateExpense() {
         
         var updatedAmountString = inputAmountString
-           if updatedAmountString.isEmpty {
-               updatedAmountString = amountString
-           }
+        if updatedAmountString.isEmpty {
+            updatedAmountString = amountString
+        }
         amount = CGFloat(Double(updatedAmountString.replacingOccurrences(of: ",", with: "")) ?? 0)
-
+        
         if let existingExpense = expense {
             // expense가 존재하면 업데이트 수행
             existingExpense.title = title

@@ -18,14 +18,14 @@ struct ContentView: View {
     @State  var setting: Bool = false
     @State var isContentReady : Bool = false
     @State private var isFloatingButtonClicked: Bool = false
-
+    
     var body: some View {
         
-        ZStack{                
-
+        ZStack{
+            
             VStack{
                 admob()
-
+                
                 TabView(selection: $currentTab){
                     
                     ExpensesView(currentTab: $currentTab, isFloatingButtonClicked: $isFloatingButtonClicked)
@@ -44,43 +44,43 @@ struct ContentView: View {
                         }
                 }
             }
-
+            
             if !isContentReady {
                 LottieAnimationVIew().transition(.opacity)
                     .background(Color.animBG)
                     .edgesIgnoringSafeArea(.all)
             }
             if isFloatingButtonClicked {
-
-                                     Color.black
-                                         .opacity(0.3)
-                                         .ignoresSafeArea(.all)
-                                         .onTapGesture {
-                                             isFloatingButtonClicked = false
-                                         }
-                                 }
-
+                
+                Color.black
+                    .opacity(0.3)
+                    .ignoresSafeArea(.all)
+                    .onTapGesture {
+                        isFloatingButtonClicked = false
+                    }
+            }
+            
         }
-
+        
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
                 withAnimation{isContentReady = true}
             })
         }
-
+        
     }
     @ViewBuilder func admob() -> some View {
-            // admob
-            GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
-        }
-}
-    
-    extension ContentView {
-        var animationSplashView : some View {
-            LottieAnimationVIew()
-        }
+        // admob
+        GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
     }
-    
+}
+
+extension ContentView {
+    var animationSplashView : some View {
+        LottieAnimationVIew()
+    }
+}
+
 struct GADBanner: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -94,7 +94,7 @@ struct GADBanner: UIViewControllerRepresentable {
         return viewController
     }
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-    
+        
         
     }
 }
