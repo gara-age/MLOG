@@ -24,8 +24,7 @@ struct CurrencySettingView: View {
     
     let currencies: [Currency] = [
         
-        Currency(symbol: "د.إ", name: NSLocalizedString("🇦🇪AED   아랍에미리트   -   디르함", comment:"")
-),
+        Currency(symbol: "د.إ", name: NSLocalizedString("🇦🇪AED   아랍에미리트   -   디르함", comment:"")),
         Currency(symbol: "؋", name: NSLocalizedString("🇦🇫AFN   아프카니스탄   -   아프가니", comment:"")),
         Currency(symbol: "L", name: NSLocalizedString("🇦🇱ALL   알바니아   -   렉", comment:"")),
         Currency(symbol: "Դ", name: NSLocalizedString("🇦🇲AMD   아르메니아   -   드람", comment:"")),
@@ -33,7 +32,7 @@ struct CurrencySettingView: View {
         Currency(symbol: "$", name: NSLocalizedString("🇦🇷ARS   아르헨티나   -   페소", comment:"")),
         Currency(symbol: "$", name: NSLocalizedString("🇦🇺AUD   오스트레일리아   -   달러", comment:"")),
         Currency(symbol: "ƒ", name: NSLocalizedString("🇦🇼AWG   아루바   -   플로린", comment:"")),
-        Currency(symbol: "ман", name: NSLocalizedString("🇦🇿AZN   아제르바이잔   -   마나트", comment:"")),
+        Currency(symbol: "₼", name: NSLocalizedString("🇦🇿AZN   아제르바이잔   -   마나트", comment:"")),
         Currency(symbol: "КМ", name: NSLocalizedString("🇧🇦BAM   보스니아 헤르체코비나   -   마커", comment:"")),
         Currency(symbol: "$", name: NSLocalizedString("🇧🇧BBD   바베이도스   -   달러", comment:"")),
         Currency(symbol: "৳", name: NSLocalizedString("🇧🇩BDT   방글라데시   -   타카", comment:"")),
@@ -42,7 +41,7 @@ struct CurrencySettingView: View {
         Currency(symbol: "₣", name: NSLocalizedString("🇧🇮BIF   브룬디   -   프랑", comment:"")),
         Currency(symbol: "$", name: NSLocalizedString("🇧🇲BMD   버뮤다   -   버뮤디안 달러", comment:"")),
         Currency(symbol: "$", name: NSLocalizedString("🇧🇳BND   브루나이   -   달러", comment:"")),
-        Currency(symbol: "Bs", name: NSLocalizedString("🇧🇴BOB   볼리비아   -   볼리비아노", comment:"")),
+        Currency(symbol: "Bs.", name: NSLocalizedString("🇧🇴BOB   볼리비아   -   볼리비아노", comment:"")),
         Currency(symbol: "R$", name: NSLocalizedString("🇧🇷BRL   브라질   -   브라질리안 헤알", comment:"")),
         Currency(symbol: "$", name: NSLocalizedString("🇧🇸BSD   바하마   -   바하미안 달러", comment:"")),
         Currency(symbol: "Nu", name: NSLocalizedString("🇧🇹BTN   부탄   -   눌트럼", comment:"")),
@@ -73,7 +72,7 @@ struct CurrencySettingView: View {
         Currency(symbol: "ლ", name: NSLocalizedString("🇬🇪GEL   조지아   -   조지아 라리", comment:"")),
         Currency(symbol: "₵", name: NSLocalizedString("🇬🇭GHS   가나   -   가나 세디", comment:"")),
         Currency(symbol: "£", name: NSLocalizedString("🇬🇮GIP   지브롤터   -   지브롤터 파운드", comment:"")),
-        Currency(symbol: "D", name: NSLocalizedString("🇿🇲GMD   잠비아   -   달라시", comment:"")),
+        Currency(symbol: "D", name: NSLocalizedString("🇿🇲GMD   감비아   -   달라시", comment:"")),
         Currency(symbol: "₣", name: NSLocalizedString("🇬🇳GNF   기니아   -   기니아 프랑", comment:"")),
         Currency(symbol: "Q", name: NSLocalizedString("🇬🇹GTQ   과테말라   -   케트살", comment:"")),
         Currency(symbol: "$", name: NSLocalizedString("🇬🇾GYD   가이아나   -   가이아나 달러", comment:"")),
