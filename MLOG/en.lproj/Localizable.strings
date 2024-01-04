@@ -5,7 +5,7 @@
   Created by 최민서 on 1/3/24.
   
 */
-
+//NSLocalizedString("", comment: "")
 //ContentVIew
 "모든 내역" = "All details";
 "카테고리" = "Category";
@@ -16,7 +16,6 @@
 "ko_KR" = "en-US";
 "yyyy년 MM월 dd일" = "MMM d, yyyy";
 
-//ExpensesView
 "직접 설정" = "Custom";
 "전체 내역" = "All Date";
 "1개월" = "One Month";
@@ -30,7 +29,7 @@
 "지출만" = "Expense";
 "초기화" = "reset";
 "큰 금액순" = "Small sum";
-"적은 금액순" "Large sum";
+"적은 금액순" = "Large sum";
 "검색" = "Search";
 "지출 내역" = "Expense List";
 "내역이 없습니다" = "Expense List is Empty";
@@ -48,7 +47,7 @@
 "완료" = "Done";
 "날짜" = "Date";
 "내역 수정" = "Edit detail";
-"돌아가기" = "Return";
+"돌아가기" = "Cancel";
 "저장" = "Save";
 "yy.MM.dd" = "yy.MM.dd";
 

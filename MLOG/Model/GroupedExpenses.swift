@@ -20,7 +20,7 @@ struct GroupedExpenses: Identifiable {
             return NSLocalizedString("오늘", comment:"")
 
         } else if calendar.isDateInYesterday(date){
-            return NSLocalizedString("", comment:"")
+            return NSLocalizedString("어제", comment:"")
 
         } else {
             let dateFormatter = DateFormatter()

@@ -47,6 +47,23 @@ struct ExpensesView: View {
     
     @Binding var isFloatingButtonClicked: Bool
     
+    struct LocalizableStrings {
+        static let all  = NSLocalizedString("전체 내역", comment: "")
+        static let oneMonth  = NSLocalizedString("1개월", comment: "")
+        static let threeMonths  = NSLocalizedString("3개월", comment: "")
+        static let lastMonth  = NSLocalizedString("지난달", comment: "")
+        static let custom  = NSLocalizedString("직접 설정", comment: "")
+        
+        static let latestFirst  = NSLocalizedString("최신순", comment: "")
+        static let oldestFirst  = NSLocalizedString("과거순", comment: "")
+
+        static let alldetails  = NSLocalizedString("전체", comment: "")
+        static let income = NSLocalizedString("수입만", comment: "")
+        static let expense  = NSLocalizedString("지출만", comment: "")
+
+
+    }
+
     enum DateFilter: String, CaseIterable {
         
         case all = "전체 내역"
@@ -54,6 +71,23 @@ struct ExpensesView: View {
         case threeMonths = "3개월"
         case lastMonth = "지난달"
         case custom = "직접 설정"
+        
+        var description : String {
+                get {
+                    switch(self) {
+                    case .all:
+                        return LocalizableStrings.all
+                    case .oneMonth:
+                        return LocalizableStrings.oneMonth
+                    case .threeMonths:
+                        return LocalizableStrings.threeMonths
+                    case .lastMonth:
+                        return LocalizableStrings.lastMonth
+                    case .custom:
+                        return LocalizableStrings.custom
+                    }
+                }
+            }
         
         var startDate: Date {
             switch self {
@@ -93,6 +127,17 @@ struct ExpensesView: View {
         case latestFirst = "최신순"
         case oldestFirst = "과거순"
         
+        var description : String {
+                get {
+                    switch(self) {
+                    case .latestFirst:
+                        return LocalizableStrings.latestFirst
+                    case .oldestFirst:
+                        return LocalizableStrings.oldestFirst
+                    }
+                }
+            }
+        
         static var defaultSortOrder: SortOrder = .latestFirst
         
     }
@@ -101,6 +146,19 @@ struct ExpensesView: View {
         case all = "전체"
         case incomeOnly = "수입만"
         case expenseOnly = "지출만"
+        
+        var description : String {
+                get {
+                    switch(self) {
+                    case .all:
+                        return LocalizableStrings.alldetails
+                    case .incomeOnly:
+                        return LocalizableStrings.income
+                    case .expenseOnly:
+                        return LocalizableStrings.expense
+                    }
+                }
+            }
     }
     
     
@@ -396,7 +454,7 @@ struct ExpensesView: View {
                 
                 
             } label: {
-                Text("\(selectedDateFilter.rawValue)")
+                Text("\(selectedDateFilter.description)")
             }
             
             Divider().frame(height: 10)
@@ -417,7 +475,7 @@ struct ExpensesView: View {
                     
                 }
             } label: {
-                Text("\(selectedSortOrder.rawValue)")
+                Text("\(selectedSortOrder.description)")
             }
             
             Divider().frame(height: 10)
@@ -439,7 +497,7 @@ struct ExpensesView: View {
                     filterExpenses(searchText)
                 }
             } label: {
-                Text("\(selectedTransactionType.rawValue)")
+                Text("\(selectedTransactionType.description)")
             }
             
             Divider().frame(height: 10)
