@@ -47,6 +47,8 @@
 		376331B02B2D828A0043CA14 /* CategoryThemeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryThemeSettingView.swift; sourceTree = "<group>"; };
 		376331B92B31E6C10043CA14 /* DateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFilterView.swift; sourceTree = "<group>"; };
 		376331BB2B31EE5F0043CA14 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		3767BEE22B47A38500AED916 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3767BEE32B47A42600AED916 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3781B4A02AFFEF0E00814D4F /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		378F17482AFAA9DB0033112C /* MLOG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLOG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		378F174B2AFAA9DB0033112C /* MLOG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLOG.swift; sourceTree = "<group>"; };
@@ -251,6 +253,8 @@
 				ko,
 				"zh-Hans",
 				ja,
+				"zh-Hant",
+				"en-GB",
 			);
 			mainGroup = 378F173F2AFAA9DB0033112C;
 			productRefGroup = 378F17492AFAA9DB0033112C /* Products */;
@@ -356,6 +360,8 @@
 				37EE84982B45901800312A79 /* ja */,
 				37EE84992B4590A600312A79 /* en */,
 				37EE849A2B466A2A00312A79 /* ko */,
+				3767BEE22B47A38500AED916 /* zh-Hant */,
+				3767BEE32B47A42600AED916 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

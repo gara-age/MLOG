@@ -1,0 +1,243 @@
+/* 
+  Localizable.strings
+  MLOG
+
+  Created by 최민서 on 1/3/24.
+  
+*/
+//NSLocalizedString("", comment: "")
+//ContentVIew
+"모든 내역" = "All details";
+"카테고리" = "Category";
+
+//GroupedExpense
+"오늘" = "Today";
+"어제" = "Yesterday";
+"ko_KR" = "en-GB";
+"yyyy년 MM월 dd일" = "MMM d, yyyy";
+
+"직접 설정" = "Custom";
+"전체 내역" = "All Date";
+"1개월" = "One Month";
+"3개월" = "Three Months";
+"지난달" = "Last Month";
+"직접 설정" = "Custom";
+"최신순" = "Lastest";
+"과거순" = "Oldest";
+"전체" = "All";
+"수입만" = "Income";
+"지출만" = "Expense";
+"초기화" = "reset";
+"큰 금액순" = "Small sum";
+"적은 금액순" = "Large sum";
+"검색" = "Search";
+"지출 내역" = "Expense List";
+"내역이 없습니다" = "Expense List is Empty";
+"내역 삭제시 복구가 어렵습니다. 정말 삭제하시겠습니까?" = "It's hard to recover when you delete the details. Are you sure you want to delete it?";
+"삭제" = "Delete";
+"취소" = "Cancel";
+//EditExpenseView
+"원" = "$";
+"미지정" = "None";
+"제목" = "Ttitle";
+"지출 또는 수입 내용을 입력하세요." = "Enter your expenditure or income.";
+"수입" = "Income";
+"지출" = "Expense";
+"금액" = "Amount";
+"완료" = "Done";
+"날짜" = "Date";
+"내역 수정" = "Edit detail";
+"돌아가기" = "Cancel";
+"저장" = "Save";
+"yy.MM.dd" = "yy.MM.dd";
+
+
+//AddExpenseView
+"내역 추가" = "Add detail";
+"추가" = "Add";
+
+//SelectFilterView
+"취소" = "Cancel";
+"적용" = "Filter";
+"검색 필터 설정" = "Set searching filter";
+
+//CategoriesView
+"생성된 카테고리가 없습니다" = "No categories have been created";
+"카테고리가 비어있습니다" = "Category is Empty.";
+"목록이 비어있습니다" = "Category List is Empty.";
+"카테고리 삭제시 카테고리에 지정된 내역들도 삭제됩니다. 정말 삭제하시겠습니까?" = "Deleting a category will also delete the details specified in the category. Are you sure you want to delete it?";
+"합계:" = "Total:";
+//AddCategorySheetView
+"카테고리명" = "Category Title";
+"카테고리명을 입력해주세요." = "Please enter a category name.";
+"새 카테고리명" = "New Category Title";
+
+//EditCategorySheetView
+"카테고리 수정" = "Edit Category Title";
+//CategoryThemeSettingView
+"카테고리 선택" = "Select Category";
+"카테고리 테마 설정" = "Set Category Theme";
+"🇦🇪AED   아랍에미리트   -   디르함" = "🇦🇪AED United Arab Emirates - Dirham";
+"🇦🇫AFN   아프카니스탄   -   아프가니" = "🇦🇫AFN   Afghanistan   -   Afghani";
+"🇦🇱ALL   알바니아   -   렉" =  "🇦🇱ALL   Albania   -   Lek";
+"🇦🇲AMD   아르메니아   -   드람" = "🇦🇲AMD Armenia - Dram";
+"🇦🇴AOA   앙골라   -   콴자" = "🇦🇴AOA Angola - Kwanza";
+"🇦🇷ARS   아르헨티나   -   페소" = "🇦🇷ARS Argentina - Peso";
+"🇦🇺AUD   오스트레일리아   -   달러" = "🇦🇺AUD Australia - Dollar";
+"🇦🇼AWG   아루바   -   플로린" = "🇦🇼AWG Aruba - Florin";
+"🇦🇿AZN   아제르바이잔   -   마나트" = "🇦🇿AZN Azerbaijan - Manat";
+"🇧🇦BAM   보스니아 헤르체코비나   -   마커" = "🇧🇦BAM Bosnia and Herzegovina - Convertible Mark";
+"🇧🇧BBD   바베이도스   -   달러" = "🇧🇧BBD Barbados - Dollar";
+"🇧🇩BDT   방글라데시   -   타카" = "🇧🇩BDT Bangladesh - Taka";
+"🇧🇬BGN   불가리아   -   불가리안 레프" = "🇧🇬BGN Bulgaria - Bulgarian Lev";
+"🇧🇭BHD   바레인   -   디나르" = "🇧🇭BHD Bahrain - Bahraini Dinar";
+"🇧🇮BIF   브룬디   -   프랑" = "🇧🇮BIF Burundi - Burundian Franc";
+"🇧🇲BMD   버뮤다   -   버뮤디안 달러" = "🇧🇲BMD Bermuda - Bermudian Dollar";
+"🇧🇳BND   브루나이   -   달러" = "🇧🇳BND Brunei - Dollar";
+"🇧🇴BOB   볼리비아   -   볼리비아노" = "🇧🇴BOB Bolivia - Boliviano";
+"🇧🇷BRL   브라질   -   브라질리안 헤알" = "🇧🇷BRL Brazil - Brazilian Real";
+"🇧🇸BSD   바하마   -   바하미안 달러" = "🇧🇸BSD Bahamas - Bahamian Dollar";
+"🇧🇹BTN   부탄   -   눌트럼" = "🇧🇹BTN Bhutan - Ngultrum";
+"🇧🇼BWP   보츠와나   -   풀라" = "🇧🇼BWP Botswana - Pula";
+"🇧🇾BYR   벨라루스   -   벨라루시안 루블" = "🇧🇾BYR Belarus - Belarusian Rouble";
+"🇧🇿BZD   벨리즈   -   달러" = "🇧🇿BZD Belize - Dollar";
+"🇨🇦CAD   캐나다   -   캐나다달러" = "🇨🇦CAD Canada - Canadian Dollar";
+"🇨🇩CDF   콩고 킨샤사   -   프랑" = "🇨🇩CDF Congo (Kinshasa) - Congolese Franc";
+"🇨🇭CHF   스위스   -   프랑" = "🇨🇭CHF Switzerland - Swiss Franc";
+"🇨🇱CLP   칠레   -   칠레니아 페소" = "🇨🇱CLP Chile - Chilean Peso";
+"🇨🇳CNY   중국   -   위안" = "🇨🇳CNY China - Yuan";
+"🇨🇴COP   콜롬비아   -   콜롬비안 페소" = "🇨🇴COP Colombia - Colombian Peso";
+"🇨🇷CRC   코스타리카   -   코스타리칸 콜론" = "🇨🇷CRC Costa Rica - Costa Rican Colón";
+"🇨🇺CUP   쿠바   -   쿠반 페소" = "🇨🇺CUP Cuba - Cuban Peso";
+"🇨🇻CVE   카보 베르데   -   카보 베르데 에스쿠도" = "🇨🇻CVE Cape Verde - Cape Verdean Escudo";
+"🇨🇿CZK   체코 공화국   -   체코 코루나" = "🇨🇿CZK Czech Republic - Czech Koruna";
+"🇩🇯DJF   지부티   -   지부티 프랑" = "🇩🇯DJF Djibouti - Djiboutian Franc";
+"🇩🇰DKK   덴마크   -   덴마크 크로네" = "🇩🇰DKK Denmark - Danish Krone";
+"🇩🇴DOP   도미니카 공화국   -   도미니카 페소" = "🇩🇴DOP Dominican Republic - Dominican Peso";
+"🇩🇿DZD   알제리   -   알제르 디나르" = "🇩🇿DZD Algeria - Algerian Dinar";
+"🇪🇬EGP   이집트   -   이집트 파운드" = "🇪🇬EGP Egypt - Egyptian Pound";
+"🇪🇷ERN   에리트레아   -   낙파" = "🇪🇷ERN Eritrea - Nakfa";
+"🇪🇹ETB   에티오피아   -   에디오피안 비르" = "🇪🇹ETB Ethiopia - Ethiopian Birr";
+"🇪🇺EUR   유로" = "🇪🇺EUR Euro";
+"🇫🇯FJD   피지   -   피지 달러" = "🇫🇯FJD Fiji - Fijian Dollar";
+"🇫🇰FKP   포크랜드 제도   -   포크랜드 제도 파운드" = "🇫🇰FKP Falkland Islands - Falkland Islands Pound";
+"🇬🇧GBP   영국   -   파운드" = "🇬🇧GBP United Kingdom - British Pound";
+"🇬🇪GEL   조지아   -   조지아 라리" = "🇬🇪GEL Georgia - Georgian Lari";
+"🇬🇭GHS   가나   -   가나 세디" = "🇬🇭GHS Ghana - Ghanaian Cedi";
+"🇬🇮GIP   지브롤터   -   지브롤터 파운드" = "🇬🇮GIP Gibraltar - Gibraltar Pound";
+"🇿🇲GMD   감비아   -   달라시" = "🇿🇲GMD dalasi - dalasi";
+"🇬🇳GNF   기니아   -   기니아 프랑" = "🇬🇳GNF Guinea - Guinean Franc";
+"🇬🇹GTQ   과테말라   -   케트살" = "🇬🇹GTQ Guatemala - Guatemalan Quetzal";
+"🇬🇾GYD   가이아나   -   가이아나 달러" = "🇬🇾GYD Guyana - Guyanese Dollar";
+"🇭🇰HKD   홍콩   -   홍콩달러" = "🇭🇰HKD Hong Kong - Hong Kong Dollar";
+"🇭🇳HNL   온두라스   -   렘피라" = "🇭🇳HNL Honduras - Honduran Lempira";
+"🇭🇹HTG   아이티   -   아이티 구르드" = "🇭🇹HTG Haiti - Haitian Gourde";
+"🇭🇺HUF   헝가리   -   헝가리 포린트" = "🇭🇺HUF Hungary - Hungarian Forint";
+"🇮🇩IDR   인도네시아   -   인도네시아 루피아" = "🇮🇩IDR Indonesia - Indonesian Rupiah";
+"🇮🇱ILS   이스라엘   -   이스라엘 신 셰켈" = "🇮🇱ILS Israel - Israeli New Shekel";
+"🇮🇳INR   인도   -   인도 루피" = "🇮🇳INR India - Indian Rupee";
+"🇮🇶IQD   이라크   -   이라크 디나르" = "🇮🇶IQD Iraq - Iraqi Dinar";
+"🇮🇷IRR   이란   -   이란 리알" = "🇮🇷IRR Iran - Iranian Rial";
+"🇮🇸ISK   아이슬란드   -   아이슬란드 크로나" = "🇮🇸ISK Iceland - Icelandic Króna";
+"🇯🇲JMD   자메이카   -   자메이카 달러" = "🇯🇲JMD Jamaica - Jamaican Dollar";
+"🇯🇴JOD   요르단   -   요르단 디나르" = "🇯🇴JOD Jordan - Jordanian Dinar";
+"🇯🇵JPY   일본   -   엔" = "🇯🇵JPY Japan - Yen";
+"🇰🇪KES   케냐   -   케냐 실링" = "🇰🇪KES Kenya - Kenyan Shilling";
+"🇰🇬KGS   키르기스스탄   -   키르기스스탄 솜" = "🇰🇬KGS Kyrgyzstan - Kyrgyzstani Som";
+"🇰🇭KHR   캄보디아   -   캄보디아 리엘" = "🇰🇭KHR Cambodia - Cambodian Riel";
+"🇰🇲KMF   코모로   -   코모로 프랑" = "🇰🇲KMF Comoros - Comorian Franc";
+"🇰🇵KPW   조선민주주의인민공화국   -   원" = "🇰🇵KPW North Korea - North Korean Won";
+"🇰🇷KRW   대한민국   -   원" =  "🇰🇷KRW South Korea - Won";
+"🇰🇼KWD   쿠웨이트   -   디나르" = "🇰🇼KWD Kuwait - Dinar";
+"🇰🇾KYD   케이맨 제도   -   달러" = "🇰🇾KYD Cayman Islands - Dollar";
+"🇰🇿KZT   카자흐스탄   -   텡게" = "🇰🇿KZT Kazakhstan - Tenge";
+"🇱🇦LAK   라오스   -   킵" = "🇱🇦LAK Laos - Kip";
+"🇱🇧LBP   레바논   -   파운드" = "🇱🇧LBP Lebanon - Pound";
+"🇱🇰LKR   스리랑카   -   루피" = "🇱🇰LKR Sri Lanka - Rupee";
+"🇱🇷LRD   라이베리아   -   달러" = "🇱🇷LRD Liberia - Dollar";
+"🇱🇸LSL   레소토   -   로티" = "🇱🇸LSL Lesotho - Loti";
+"🇱🇾LYD   리비아   -   디나르" = "🇱🇾LYD Libya - Dinar";
+"🇲🇦MAD   모로코   -   디르함" = "🇲🇦MAD Morocco - Dirham";
+"🇲🇩MDL   몰도바   -   레우" = "🇲🇩MDL Moldova - Leu";
+"🇲🇬MGA   마다가스카르   -   아리아리" = "🇲🇬MGA Madagascar - Ariary";
+"🇲🇰MKD   마케도니아   -   데나르" = "🇲🇰MKD North Macedonia - Denar";
+"🇲🇲MMK   미얀마   -   짯" = "🇲🇲MMK Myanmar - Kyat";
+"🇲🇳MNT   몽골   -   투그릭" = "🇲🇳MNT Mongolia - Tugrik";
+"🇲🇴MOP   마카오   -   파타카" = "🇲🇴MOP Macao - Pataca";
+"🇲🇷MRO   모리타니   -   우기야" = "🇲🇷MRO Mauritania - Ouguiya";
+"🇲🇺MUR   모리셔스   -   루피" = "🇲🇺MUR Mauritius - Rupee";
+"🇲🇻MVR   몰디브   -   루피야" = "🇲🇻MVR Maldives - Rufiyaa";
+"🇲🇼MWK   말라위   -   콰차" = "🇲🇼MWK Malawi - Kwacha";
+"🇲🇽MXN   멕시코   -   페소" = "🇲🇽MXN Mexico - Peso";
+"🇲🇾MYR   말레이시아   -   링깃" = "🇲🇾MYR Malaysia - Ringgit";
+"🇲🇿MZN   모잠비크   -   메티칼" = "🇲🇿MZN Mozambique - Metical";
+"🇳🇦NAD   나미비아   -   달러" = "🇳🇦NAD Namibia - Dollar";
+"🇳🇬NGN   나이지리아   -   나이라" = "🇳🇬NGN Nigeria - Naira";
+"🇳🇮NIO   니카라과   -   코르도바" = "🇳🇮NIO Nicaragua - Cordoba";
+"🇳🇴NOK   노르웨이   -   크로네" = "🇳🇴NOK Norway - Krone";
+"🇳🇵NPR   네팔   -   루피" = "🇳🇵NPR Nepal - Rupee";
+"🇳🇿NZD   뉴질랜드   -   달러" = "🇳🇿NZD New Zealand - Dollar";
+"🇴🇲OMR   오만   -   리알" = "🇴🇲OMR Oman - Rial";
+"🇵🇦PAB   파나마   -   발보아" = "🇵🇦PAB Panama - Balboa";
+"🇵🇪PEN   페루   -   솔" = "🇵🇪PEN Peru - Sol";
+"🇵🇬PGK   파푸아뉴기니   -   키나" = "🇵🇬PGK Papua New Guinea - Kina";
+"🇵🇭PHP   필리핀   -   페소" = "🇵🇭PHP Philippines - Peso";
+"🇵🇰PKR   파키스탄   -   루피" = "🇵🇰PKR Pakistan - Rupee";
+"🇵🇱PLN   폴란드 즈워티" = "🇵🇱PLN Poland - Polish Zloty";
+"🇵🇾PYG   파라과이   -   과라니" = "🇵🇾PYG Paraguay - Guarani";
+"🇶🇦QAR   카타르   -   리얄" = "🇶🇦QAR Qatar - Riyal";
+"🇷🇴RON   루마니아   -   레우" = "🇷🇴RON Romania - Leu";
+"🇷🇸RSD   세르비아   -   디나르" = "🇷🇸RSD Serbia - Dinar";
+"🇷🇺RUB   러시아   -   루블" = "🇷🇺RUB Russia - Rouble";
+"🇷🇼RWF   르완다   -   프랑" = "🇷🇼RWF Rwanda - Franc";
+"🇸🇦SAR   사우디아라비아   -   리얄" = "🇸🇦SAR Saudi Arabia - Riyal";
+"🇸🇧SBD   솔로몬 제도   -   달러" = "🇸🇧SBD Solomon Islands - Dollar";
+"🇸🇨SCR   세이셸   -   루피" = "🇸🇨SCR Seychelles - Rupee";
+"🇸🇩SDG   수단   -   파운드" = "🇸🇩SDG Sudan - Pound";
+"🇸🇪SEK   스웨덴   -   크로나" = "🇸🇪SEK Sweden - Krona";
+"🇸🇬SGD   싱가포르   -   달러" = "🇸🇬SGD Singapore - Dollar";
+"🇸🇭SHP   헬레나   -   파운드" = "🇸🇭SHP Saint Helena - Pound";
+"🇸🇱SLL   시에라리온   -   시에라리온" = "🇸🇱SLL Sierra Leone - Leone";
+"🇸🇴SOS   소말리아   -   실링" = "🇸🇴SOS Somalia - Shilling";
+"🇸🇷SRD   수리남   -   달러" = "🇸🇷SRD Suriname - Dollar";
+"🇸🇸SSP   남수단   -   파운드" = "🇸🇸SSP South Sudan - Pound";
+"🇸🇹STD   상투메 프린시페   -   도브라" = "🇸🇹STD Sao Tome and Principe - Dobra";
+"🇸🇻SVC   엘살바도르   -   콜론" = "🇸🇻SVC El Salvador - Colon";
+"🇸🇾SYP   시리아   -   파운드" = "🇸🇾SYP Syria - Pound";
+"🇸🇿SZL   에스와티니   -   릴랑게니" = "🇸🇿SZL Eswatini - Lilangeni";
+"🇹🇭THB   태국   -   바트" = "🇹🇭THB Thailand - Baht";
+"🇹🇯TJS   타지키스탄   -   소모니" = "🇹🇯TJS Tajikistan - Somoni";
+"🇹🇲TMT   투르크메니스탄   -   마나트" = "🇹🇲TMT Turkmenistan - Manat";
+"🇹🇳TND   튀니지   -   디나르" = "🇹🇳TND Tunisia - Dinar";
+"🇹🇴TOP   통가   -   팡가" = "🇹🇴TOP Tonga - Pa'anga";
+"🇹🇷TRY   튀르키예   -   리라" = "🇹🇷TRY Turkey - Lira";
+"🇹🇹TTD   트리니다드 토바고   -   달러" = "🇹🇹TTD Trinidad and Tobago - Dollar";
+"🇹🇼TWD   대만   -   신 대만 달러" = "🇹🇼TWD Taiwan - New Taiwan Dollar";
+"🇹🇿TZS   탄자니아   -   실링" = "🇹🇿TZS Tanzania - Shilling";
+"🇺🇦UAH   우크라이나   -   흐리우냐" = "🇺🇦UAH Ukraine - Hryvnia";
+"🇺🇬UGX   우간다   -   실링" = "🇺🇬UGX Uganda - Shilling";
+"🇺🇸USD   미국   -   달러" = "🇺🇸USD United States - Dollar";
+"🇺🇾UYU   우루과이   -   페소" = "🇺🇾UYU Uruguay - Peso";
+"🇺🇿UZS   우즈베키스탄   -   숨" = "🇺🇿UZS Uzbekistan - Som";
+"🇻🇪VEF   베네수엘라   -   볼리바르" = "🇻🇪VEF Venezuela - Bolivar";
+"🇻🇳VND   베트남   -   동" = "🇻🇳VND Vietnam - Dong";
+"🇻🇺VUV   바누아투   -   바투" = "🇻🇺VUV Vanuatu - Vatu";
+"🇼🇸WST   사모아   -   탈라" = "🇼🇸WST Samoa - Tala";
+"🇩🇲XCD   도미니카   -   동카리브 달러" = "🇩🇲XCD Dominica - East Caribbean Dollar";
+"🇾🇪YER   예멘   -   리알" = "🇾🇪YER Yemen - Yemeni Rial";
+"🇿🇦ZAR   남아프리카   -   란드" = "🇿🇦ZAR South Africa - Rand";
+"🇿🇲ZMW   잠비아   -   크와차" = "🇿🇲ZMW Zambia - Kwacha";
+"🇿🇼ZWL   짐바브웨   -   달러" = "🇿🇼ZWL Zimbabwe - Dollar";
+"현재 통화 : %@" = "Selected Currency : %@";
+
+
+//FloatingButtonView
+"통화 설정" = "Set Currency";
+"카테고리 테마 지정" = "Set Category Theme";
+"카테고리 추가" = "Add Category";
+
+//DateFilterView
+"시작 날짜" = "Start Date";
+"종료 날짜" = "End Date";
+"취소" = "Cancel";
+"적용" = "Filter";

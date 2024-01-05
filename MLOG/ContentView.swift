@@ -18,6 +18,9 @@ struct ContentView: View {
     @State  var setting: Bool = false
     @State var isContentReady : Bool = false
     @State private var isFloatingButtonClicked: Bool = false
+    @State private var tagForExpense : String = "전체 내역"
+    @State private var tagForCategory : String = "카테고리"
+    @State var show : Bool = false
     
     var body: some View {
         
@@ -29,7 +32,7 @@ struct ContentView: View {
                 TabView(selection: $currentTab){
                     
                     ExpensesView(currentTab: $currentTab, isFloatingButtonClicked: $isFloatingButtonClicked)
-                        .tag("전체 내역")
+                        .tag(NSLocalizedString(tagForExpense, comment:""))
                         .tabItem {
                             Image(systemName: "creditcard.fill")
                             Text(NSLocalizedString("전체 내역", comment:""))
@@ -37,7 +40,7 @@ struct ContentView: View {
                     
                     
                     CategoriesView(isFloatingButtonClicked: $isFloatingButtonClicked)
-                        .tag(NSLocalizedString("카테고리", comment:""))
+                        .tag(NSLocalizedString(tagForCategory, comment:""))
                         .tabItem {
                             Image(systemName: "list.clipboard.fill")
                             Text(NSLocalizedString("카테고리", comment:""))
@@ -53,7 +56,7 @@ struct ContentView: View {
                     .onDisappear {
                         // LottieAnimationVIew가 사라질 때, 처음 실행 여부를 확인하고 CurrencySettingView를 표시
                         if !UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce") {
-                            UserDefaults.standard.set(true, forKey: "isAppAlreadyLaunchedOnce")
+                            UserDefaults.standard.set(false, forKey: "isAppAlreadyLaunchedOnce")
                             setting = true
                         }
                     }
@@ -70,9 +73,21 @@ struct ContentView: View {
             }
             
         }
+        //AddExpenseView -> 튜토리얼 화면 띄울 부분 , 실제로는 튜토리얼을 통화 설정 위에 overlay로 띄우는게 나을듯
+//        .sheet(isPresented: $show) {
+//            AddExpenseView()
+//                .onDisappear {
+//                    // LottieAnimationVIew가 사라질 때, 처음 실행 여부를 확인하고 CurrencySettingView를 표시
+//                    if !UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce") {
+//                        UserDefaults.standard.set(true, forKey: "isAppAlreadyLaunchedOnce")
+//                        setting = true
+//                    }
+//                }
+//        }
         //앱을 처음 실행할때만 통화설정 창 열림
         .sheet(isPresented: $setting) {
             CurrencySettingView()
+            .interactiveDismissDisabled()
         }
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: {
