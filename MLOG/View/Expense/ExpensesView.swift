@@ -182,68 +182,6 @@ struct ExpensesView: View {
                             }
                         }
                     }
-                //                    .toolbar(content: {
-                //                        ToolbarItem(placement: .topBarTrailing) {
-                //                            Menu(content: {
-                //                                Button {
-                //                                    addExpense.toggle()
-                //
-                //                                }
-                //                            label: {
-                //                                Label("내역 추가", systemImage: "note.text.badge.plus")
-                //                            }
-                //                            .sheet(isPresented: $addExpense) {
-                //                                AddExpenseView()
-                //                                    .interactiveDismissDisabled()
-                //                            }
-                //
-                //                                Button {
-                //                                    addCategory.toggle()
-                //
-                //
-                //                                }
-                //                            label: {
-                //                                Label("카테고리 추가", systemImage: "square.grid.3x1.folder.badge.plus")
-                //                            }
-                //                            .sheet(isPresented: $addCategory) {
-                //                                AddCategorySheetView(
-                //                                    categoryName: $categoryName,
-                //                                    addCategory: $addCategory,
-                //                                    showCategoryThemeSettingView: $showCategoryThemeSettingView
-                //                                )
-                //                            }
-                //
-                //
-                //                                Button {
-                //                                    showCategoryThemeSettingView.toggle()
-                //
-                //                                }
-                //                            label: {
-                //                                Label("카테고리 테마 지정", systemImage: "paintpalette")
-                //                            }
-                //                            .sheet(isPresented: $showCategoryThemeSettingView) {
-                //                                CategoryThemeSettingView()
-                //                            }
-                //
-                //
-                //                                Button {
-                //                                    setCurrency.toggle()
-                //
-                //                                }
-                //                            label: {
-                //                                Label("통화 설정", systemImage: "dollarsign")
-                //                            }
-                //                            .sheet(isPresented: $setCurrency) {
-                //                                CurrencySettingView()
-                //                                    .interactiveDismissDisabled()
-                //                            }
-                //                            }) {
-                //                                Image(systemName: "plus")
-                //
-                //
-                //                            }
-                //                        }
-                //                    })
                     .blur(radius: showFilterView ? 8 : 0)
                     .disabled(showFilterView)
                     .overlay{
