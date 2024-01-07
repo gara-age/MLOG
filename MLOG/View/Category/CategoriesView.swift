@@ -53,7 +53,7 @@ struct CategoriesView: View {
     
     enum DateFilter: String, CaseIterable {
         
-        case all = "전체 내역"
+        case all = "모든 날짜"
         case oneMonth = "1개월"
         case threeMonths = "3개월"
         case lastMonth = "지난달"
@@ -290,7 +290,7 @@ struct CategorySectionView: View {
     
     enum DateFilter: String, CaseIterable {
         
-        case all = "전체 내역"
+        case all = "모든 날짜"
         case oneMonth = "1개월"
         case threeMonths = "3개월"
         case lastMonth = "지난달"

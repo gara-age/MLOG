@@ -12,15 +12,20 @@ import GoogleMobileAds
 struct ContentView: View {
     
     
-    @State private var currentTab: String = NSLocalizedString("전체 내역", comment:"")
+    @State private var currentTab: String = NSLocalizedString("모든 내역", comment:"")
     @State var addExpense: Bool = false
     @State  var addCategory: Bool = false
     @State  var setting: Bool = false
     @State var isContentReady : Bool = false
     @State private var isFloatingButtonClicked: Bool = false
-    @State private var tagForExpense : String = "전체 내역"
-    @State private var tagForCategory : String = "카테고리"
-    @State var show : Bool = false
+    @State private var tagForExpense : String = NSLocalizedString("모든 내역", comment:"")
+    @State private var tagForCategory : String = NSLocalizedString("카테고리", comment:"")
+    @State var korea : Bool = false
+    @State var english : Bool = false
+    @State var chinaEasy : Bool = false
+    @State var chinaHard : Bool = false
+    @State var japan : Bool = false
+
     
     var body: some View {
         
@@ -35,7 +40,7 @@ struct ContentView: View {
                         .tag(NSLocalizedString(tagForExpense, comment:""))
                         .tabItem {
                             Image(systemName: "creditcard.fill")
-                            Text(NSLocalizedString("전체 내역", comment:""))
+                            Text(NSLocalizedString("모든 내역", comment:""))
                         }
                     
                     
@@ -57,7 +62,17 @@ struct ContentView: View {
                         // LottieAnimationVIew가 사라질 때, 처음 실행 여부를 확인하고 CurrencySettingView를 표시
                         if !UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce") {
                             UserDefaults.standard.set(false, forKey: "isAppAlreadyLaunchedOnce")
-                            setting = true
+                            if tagForExpense == "모든 내역" {
+                                korea.toggle()
+                            } else if tagForExpense == "All details" {
+                                english.toggle()
+                            } else if tagForExpense == "すべての詳細" {
+                                japan.toggle()
+                            } else if tagForExpense == "所有明细" {
+                                chinaEasy.toggle() //중국어 간체
+                            } else if tagForExpense == "所有明細" {
+                                chinaHard.toggle() //중국어 번체
+                            }
                         }
                     }
             }
@@ -73,8 +88,8 @@ struct ContentView: View {
             }
             
         }
-        //AddExpenseView -> 튜토리얼 화면 띄울 부분 , 실제로는 튜토리얼을 통화 설정 위에 overlay로 띄우는게 나을듯
-//        .sheet(isPresented: $show) {
+//        //AddExpenseView -> 튜토리얼 화면 띄울 부분 , 실제로는 튜토리얼을 통화 설정 위에 overlay로 띄우는게 나을듯
+//        .sheet(isPresented: $korea) {
 //            AddExpenseView()
 //                .onDisappear {
 //                    // LottieAnimationVIew가 사라질 때, 처음 실행 여부를 확인하고 CurrencySettingView를 표시
@@ -84,6 +99,7 @@ struct ContentView: View {
 //                    }
 //                }
 //        }
+    
         //앱을 처음 실행할때만 통화설정 창 열림
         .sheet(isPresented: $setting) {
             CurrencySettingView()

@@ -48,7 +48,7 @@ struct ExpensesView: View {
     @Binding var isFloatingButtonClicked: Bool
     
     struct LocalizableStrings {
-        static let all  = NSLocalizedString("전체 내역", comment: "")
+        static let all  = NSLocalizedString("모든 날짜", comment: "")
         static let oneMonth  = NSLocalizedString("1개월", comment: "")
         static let threeMonths  = NSLocalizedString("3개월", comment: "")
         static let lastMonth  = NSLocalizedString("지난달", comment: "")
@@ -66,7 +66,7 @@ struct ExpensesView: View {
 
     enum DateFilter: String, CaseIterable {
         
-        case all = "전체 내역"
+        case all = "모든 날짜"
         case oneMonth = "1개월"
         case threeMonths = "3개월"
         case lastMonth = "지난달"
@@ -385,7 +385,7 @@ struct ExpensesView: View {
                     showFilterView.toggle()
                     
                 }
-                Button(NSLocalizedString("전체 내역", comment:"")){
+                Button(NSLocalizedString("모든 날짜", comment:"")){
                     selectedDateFilter = .all
                     filterExpenses(searchText)
                 }
