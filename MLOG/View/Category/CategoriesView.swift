@@ -468,8 +468,8 @@ struct CategorySectionView: View {
                let savedFormatter = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NumberFormatter {
                 // 음수와 양수에 대한 형식 적용
                 if selectedCurrency == "원" {
-                    savedFormatter.positiveFormat = "#,##0 \(selectedCurrency)"
-                    savedFormatter.negativeFormat = "- #,##0 \(selectedCurrency)"
+                    savedFormatter.positiveFormat = "#,##0.## \(selectedCurrency)"
+                    savedFormatter.negativeFormat = "- #,##0.## \(selectedCurrency)"
                 } else if ["د.إ", "ب.د", "د.ج", "ع.د", "د.ا", "د.ك", "ل.د", "د.م.", "ރ.", "ر.ع.", "ر.ق", "ر.س", "ل.س", "د.ت", "﷼","ج.م"].contains(selectedCurrency)
                 {
                     // 특정 통화일 경우
