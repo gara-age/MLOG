@@ -40,7 +40,7 @@ struct CategoryThemeSettingView: View {
                                 settingsViewModel.setCategoryColor(nil, color: selectedCategoryColor)
                             }
                         } label: {
-                            Text(settingsViewModel.newlyAddedCategoryName.isEmpty ? category?.categoryName ?? NSLocalizedString("카테고리 선택", comment:"") : settingsViewModel.newlyAddedCategoryName)
+                            Text(category?.categoryName ?? NSLocalizedString("카테고리 선택", comment:""))
                         }
                         
                         ColorPicker("", selection: $selectedCategoryColor)
@@ -61,7 +61,6 @@ struct CategoryThemeSettingView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(NSLocalizedString("저장", comment:"")) {
-                        settingsViewModel.newlyAddedCategoryName = ""
                         dismiss()
                     }
                 }
@@ -99,9 +98,7 @@ class SettingsViewModel: ObservableObject {
             let uiColor = UIColor.random()
             return Color(uiColor)
         }
-    func setNewlyAddedCategoryName(_ categoryName: String) {
-            newlyAddedCategoryName = categoryName
-        }
+
     
     @Published var color: Color = .green {
         didSet {

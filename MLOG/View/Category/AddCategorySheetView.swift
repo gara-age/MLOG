@@ -43,7 +43,6 @@ struct AddCategorySheetView: View {
                         context.insert(category)
                         
                         addedCategory = category
-                        SettingsViewModel.shared.setNewlyAddedCategoryName(category.categoryName)
 
                         categoryName = ""
                         addCategory = false
