@@ -44,7 +44,7 @@ struct ExpensesView: View {
     @State private var isSearching = false
     @State private var selectedExpenseForDeletion: Expense?
     @State private var showCategoryThemeSettingView = false
-    
+
     @Binding var isFloatingButtonClicked: Bool
     
     struct LocalizableStrings {
@@ -264,8 +264,7 @@ struct ExpensesView: View {
         .sheet(isPresented: $addCategory) {
             AddCategorySheetView(
                 categoryName: $categoryName,
-                addCategory: $addCategory,
-                showCategoryThemeSettingView: $showCategoryThemeSettingView
+                addCategory: $addCategory
             )
             .interactiveDismissDisabled()
         }

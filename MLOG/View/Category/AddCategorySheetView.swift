@@ -15,7 +15,6 @@ struct AddCategorySheetView: View {
     @State private var addedCategory: Category?
     @State private var addedCategories: [Category] = []
     @State private var previousCategoryColor: Color = .green
-    @Binding var showCategoryThemeSettingView: Bool
     
     
     
@@ -49,7 +48,6 @@ struct AddCategorySheetView: View {
                         categoryName = ""
                         addCategory = false
 
-                        showCategoryThemeSettingView = true
 
                     }
                     .disabled(categoryName.isEmpty)
