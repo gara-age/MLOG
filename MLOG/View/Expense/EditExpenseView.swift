@@ -254,7 +254,7 @@ struct EditExpenseView: View {
     }
     
     var isUpdateButtonDisabled: Bool {
-        return title.isEmpty || inputAmountString == nil || (!isSelectedIncome && !isSelectedExpense)
+        return title.isEmpty || inputAmountString == nil || inputAmountString == "0" || (!isSelectedIncome && !isSelectedExpense)
     }
     
     

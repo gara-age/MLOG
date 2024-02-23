@@ -234,7 +234,7 @@ struct AddExpenseView: View {
         
     }
     var isAddButtonDisabled: Bool {
-        return title.isEmpty || amountString == nil || (!isSelectedIncome && !isSelectedExpense)
+        return title.isEmpty || amountString == nil || amountString == "0" || (!isSelectedIncome && !isSelectedExpense)
     }
     
     func addExpense() {
