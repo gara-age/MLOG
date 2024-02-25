@@ -11,6 +11,8 @@ import SwiftData
 struct AddCategorySheetView: View {
     @Binding var categoryName: String
     @Binding var addCategory: Bool
+    @Query(animation: .snappy) private var allCategories: [Category]
+
     @Environment(\.modelContext) var context
     @State private var addedCategory: Category?
     @State private var addedCategories: [Category] = []
@@ -49,6 +51,8 @@ struct AddCategorySheetView: View {
 
 
                     }
+                    .disabled(categoryName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || allCategories.contains(where: { $0.categoryName == self.categoryName }))
+
                     .disabled(categoryName.isEmpty)
                 }
             }

@@ -16,7 +16,8 @@ struct EditCategorySheetView: View {
     @State private var addedCategory: Category?
     @State var inputCategoryName : String = ""
     var category: Category?
-    
+    @Query(animation: .snappy) private var allCategories: [Category]
+
     init(category: Category? = nil, categoryName: Binding<String>, addCategory: Binding<Bool>) {
         self.category = category
         self._categoryName = categoryName
@@ -61,7 +62,7 @@ struct EditCategorySheetView: View {
                         }
                         dismiss()
                     }
-                    .disabled(inputCategoryName.isEmpty)
+                    .disabled(inputCategoryName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || allCategories.contains(where: { $0.categoryName == inputCategoryName }))
                 }
             }
         }
